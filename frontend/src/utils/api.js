@@ -7,3 +7,9 @@ export function getCategories() {
     .then(res => res.json())
     .then(data => data.categories)
 }
+
+export function getPosts() {
+  return fetch(`${BASE_URL}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+}
