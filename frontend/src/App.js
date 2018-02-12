@@ -6,8 +6,7 @@ import './App.css'
 
 class App extends Component {
   componentDidMount() {
-    getCategories()
-      .then(this.props.fetchCategories)
+    getCategories().then(this.props.fetchCategories)
   }
   render() {
     if (!this.props.categories) {
