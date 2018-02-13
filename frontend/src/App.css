@@ -2,7 +2,7 @@
 
 .title-bar {
   text-align: center;
-  padding: 10px;
+  padding: 0.5em;
   font-size: x-large;
   background-color: #000;
 }
@@ -17,19 +17,19 @@
   display: flex;
   justify-content: space-evenly;
   background: #BBB;
-  padding: 10px 0px;
-  margin-bottom: 10px;
+  padding: 0.5em 0;
+  margin-bottom: 0.6em;
 }
 
 /* posts */
 
 .post-list {
-  padding: 5px 20px;
+  padding: 0.4em 1.25em;
   display: flex;
   flex-direction: column;
 }
 .post-item {
-  padding: 20px 0px;
+  padding: 1.25em 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -44,7 +44,7 @@
   font-size: large;
   font-weight: bold;
   white-space: pre;
-  margin-right: 15px;
+  margin-right: 0.8em;
 }
 .post-title {
   font-size: larger;
