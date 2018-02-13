@@ -23,11 +23,17 @@ class App extends Component {
             ))
           }
         </div>
-        {this.props.posts.ids
-          .map(postId => (
-            <div key={postId}>{this.props.posts.posts[postId].title}</div>
-          ))
-        }
+        <div className="post-list">
+          {this.props.posts.ids
+            .map(postId => (
+              <div key={postId} className="post-item">
+                <div className="post-vote-score">{this.props.posts.posts[postId].voteScore.toString().padStart(5)}</div>
+                <div className="post-title">{this.props.posts.posts[postId].title}</div>
+                <div className="post-comment-count">{this.props.posts.posts[postId].commentCount} comment(s)</div>
+              </div>
+            ))
+          }
+        </div>
       </div>
     );
   }

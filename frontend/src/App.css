@@ -7,3 +7,37 @@
   padding: 10px 0px;
   margin-bottom: 10px;
 }
+
+/* posts */
+
+.post-list {
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.post-item {
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #DDD;
+}
+.post-item:last-child {
+  border-bottom: none;
+}
+.post-vote-score {
+  color: #BBB;
+  font-size: large;
+  font-weight: bold;
+  white-space: pre;
+  margin-right: 15px;
+}
+.post-title {
+  font-size: larger;
+}
+.post-comment-count {
+  font-size: smaller;
+  color: #888;
+  font-weight: bold;
+}
