@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchCategories, fetchPosts } from './actions'
 import { getCategories, getPosts } from './utils/api'
-import { capitalize } from './utils/string'
+import CategoryList from './CategoryList'
 import './App.css'
 
 class App extends Component {
@@ -17,13 +17,7 @@ class App extends Component {
     return (
       <div>
         <div className="title-bar">Readable</div>
-        <div className="category-list">
-          {this.props.categories
-            .map(cat => (
-              <div key={cat.name} className="category-item">{capitalize(cat.name)}</div>
-            ))
-          }
-        </div>
+        <CategoryList categories={this.props.categories} />
         <div className="post-list">
           {this.props.posts.ids
             .map(postId => (
