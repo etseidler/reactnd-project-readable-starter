@@ -1,0 +1,9 @@
+/* categories */
+
+.category-list {
+  display: flex;
+  justify-content: space-evenly;
+  background: #BBB;
+  padding: 10px 0px;
+  margin-bottom: 10px;
+}
