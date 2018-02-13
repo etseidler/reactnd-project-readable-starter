@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from './actions'
 import { getCategories, getPosts } from './utils/api'
 import CategoryList from './CategoryList'
@@ -19,7 +20,13 @@ class App extends Component {
       <div>
         <div className="title-bar">Readable</div>
         <CategoryList categories={this.props.categories} />
-        <PostList posts={this.props.posts} />
+        <Switch>
+            <Route exact path='/'
+              render={() => (
+                <PostList posts={this.props.posts} />
+              )}
+            />
+        </Switch>
       </div>
     );
   }
