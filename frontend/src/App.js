@@ -4,6 +4,7 @@ import { Route, Switch, Link, withRouter } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from './actions'
 import { getCategories, getPosts } from './utils/api'
 import CategoryList from './CategoryList'
+import ErrorPage from './ErrorPage'
 import PostList from './PostList'
 import './App.css'
 
@@ -26,6 +27,7 @@ class App extends Component {
                 <PostList posts={this.props.posts} />
               )}
             />
+            <Route component={ErrorPage} />
         </Switch>
       </div>
     );
