@@ -5,7 +5,10 @@
   padding: 10px;
   font-size: x-large;
   background-color: #000;
+}
+.title-bar a {
   color: #FFF;
+  text-decoration: none;
 }
 
 /* categories */
