@@ -16,6 +16,7 @@ class App extends Component {
     }
     return (
       <div>
+        <div className="title-bar">Readable</div>
         <div className="category-list">
           {this.props.categories
             .map(cat => (
