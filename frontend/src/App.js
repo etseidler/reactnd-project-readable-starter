@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Link, withRouter } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from './actions'
 import { getCategories, getPosts } from './utils/api'
 import CategoryList from './CategoryList'
@@ -18,7 +18,7 @@ class App extends Component {
     }
     return (
       <div>
-        <div className="title-bar">Readable</div>
+        <div className="title-bar"><Link to="/">Readable</Link></div>
         <CategoryList categories={this.props.categories} />
         <Switch>
             <Route exact path='/'
@@ -46,7 +46,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(App))
