@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchCategories, fetchPosts } from './actions'
 import { getCategories, getPosts } from './utils/api'
 import CategoryList from './CategoryList'
+import PostList from './PostList'
 import './App.css'
 
 class App extends Component {
@@ -18,17 +19,7 @@ class App extends Component {
       <div>
         <div className="title-bar">Readable</div>
         <CategoryList categories={this.props.categories} />
-        <div className="post-list">
-          {this.props.posts.ids
-            .map(postId => (
-              <div key={postId} className="post-item">
-                <div className="post-vote-score">{this.props.posts.posts[postId].voteScore.toString().padStart(5)}</div>
-                <div className="post-title">{this.props.posts.posts[postId].title}</div>
-                <div className="post-comment-count">{this.props.posts.posts[postId].commentCount} comment(s)</div>
-              </div>
-            ))
-          }
-        </div>
+        <PostList posts={this.props.posts} />
       </div>
     );
   }
