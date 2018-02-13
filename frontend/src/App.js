@@ -19,13 +19,13 @@ class App extends Component {
         <div className="category-list">
           {this.props.categories
             .map(cat => (
-              <div className="category-item">{capitalize(cat.name)}</div>
+              <div key={cat.name} className="category-item">{capitalize(cat.name)}</div>
             ))
           }
         </div>
         {this.props.posts.ids
           .map(postId => (
-            <div>{this.props.posts.posts[postId].title}</div>
+            <div key={postId}>{this.props.posts.posts[postId].title}</div>
           ))
         }
       </div>
