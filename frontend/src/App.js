@@ -27,6 +27,15 @@ class App extends Component {
                 <PostList posts={this.props.posts} />
               )}
             />
+            <Route exact path='/category/:name'
+              render={props => {
+                const postIdsInCategory = Object.keys(this.props.posts.posts)
+                  .filter((postKey) => {
+                    return this.props.posts.posts[postKey].category === props.match.params.name
+                  })
+                return <PostList posts={this.props.posts} postIdsInCategory={postIdsInCategory} />
+              }}
+            />
             <Route component={ErrorPage} />
         </Switch>
       </div>
