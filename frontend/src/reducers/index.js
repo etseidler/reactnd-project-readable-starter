@@ -27,7 +27,6 @@ function posts(state = {}, action) {
       const allIds = action.posts.map(post => post.id)
       const byId = action.posts.reduce((acc, cur) => {
         acc[cur.id] = cur
-        delete cur.id
         return acc
       }, {})
       return {
