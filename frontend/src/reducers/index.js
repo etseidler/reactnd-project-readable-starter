@@ -7,7 +7,15 @@ import {
 function categories(state = [], action) {
   switch (action.type) {
     case FETCH_CATEGORIES:
-      return action.categories
+      const allNames = action.categories.map(category => category.name)
+      const byName = action.categories.reduce((acc, cur) => {
+        acc[cur.name] = cur
+        return acc
+      }, {})
+      return {
+        byName,
+        allNames
+      }
     default:
       return state
   }

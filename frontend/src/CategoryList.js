@@ -5,10 +5,11 @@ import { capitalize } from './utils/helpers'
 function CategoryList(props) {
   return (
     <div className="category-list">
-      {props.categories
-        .map(cat => (
-          <div key={cat.name} className="category-item"><Link to={`/category/${cat.path}`} >{capitalize(cat.name)}</Link></div>
-        ))
+      {props.categories.allNames
+        .map((catName) => {
+          const { name, path } = props.categories.byName[catName]
+          return <div key={name} className="category-item"><Link to={`/category/${path}`} >{capitalize(name)}</Link></div>
+        })
       }
     </div>
   )
