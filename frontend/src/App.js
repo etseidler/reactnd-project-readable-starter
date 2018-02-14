@@ -30,6 +30,9 @@ class App extends Component {
             <Route exact path='/category/:name'
               render={props => {
                 const { match: { params: { name: urlCategoryName } } } = props
+                if (!this.props.categories.allNames.includes(urlCategoryName)) {
+                  return <NotFound text="Category Not Found" />
+                }
                 const postIdsInCategory = Object.keys(this.props.posts.byId)
                   .filter((postKey) => {
                     return this.props.posts.byId[postKey].category === urlCategoryName
