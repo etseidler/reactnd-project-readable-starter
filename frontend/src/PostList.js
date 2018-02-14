@@ -2,7 +2,7 @@ import React from 'react'
 import NotFound from './NotFound'
 
 function PostList(props) {
-  const { posts: { ids: postIds, posts }, postIdsInCategory } = props;
+  const { posts: { allIds: postIds, byId: posts }, postIdsInCategory } = props;
   const filteredPostIds = postIds
     .filter(postId => postIdsInCategory === undefined || postIdsInCategory.includes(postId))
   return (

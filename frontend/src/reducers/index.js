@@ -16,15 +16,15 @@ function categories(state = [], action) {
 function posts(state = {}, action) {
   switch (action.type) {
     case FETCH_POSTS:
-      const ids = action.posts.map(post => post.id)
-      const posts = action.posts.reduce((acc, cur) => {
+      const allIds = action.posts.map(post => post.id)
+      const byId = action.posts.reduce((acc, cur) => {
         acc[cur.id] = cur
         delete cur.id
         return acc
       }, {})
       return {
-        posts,
-        ids
+        byId,
+        allIds
       }
     default:
       return state

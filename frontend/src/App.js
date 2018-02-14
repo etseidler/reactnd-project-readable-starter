@@ -14,7 +14,7 @@ class App extends Component {
     getPosts().then(this.props.fetchPosts)
   }
   render() {
-    if (!this.props.categories || !this.props.posts.ids) {
+    if (!this.props.categories || !this.props.posts.allIds) {
       return null
     }
     return (
@@ -30,9 +30,9 @@ class App extends Component {
             <Route exact path='/category/:name'
               render={props => {
                 const { match: { params: { name: urlCategoryName } } } = props
-                const postIdsInCategory = Object.keys(this.props.posts.posts)
+                const postIdsInCategory = Object.keys(this.props.posts.byId)
                   .filter((postKey) => {
-                    return this.props.posts.posts[postKey].category === urlCategoryName
+                    return this.props.posts.byId[postKey].category === urlCategoryName
                   })
                 return <PostList posts={this.props.posts} postIdsInCategory={postIdsInCategory} />
               }}
