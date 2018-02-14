@@ -54,6 +54,11 @@
   color: #888;
   font-weight: bold;
 }
+.no-posts-found {
+  text-align: center;
+  font-size: 1.5em;
+  padding-top: 1em;
+}
 
 /* page not found */
 
