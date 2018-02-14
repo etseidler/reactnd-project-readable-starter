@@ -29,9 +29,10 @@ class App extends Component {
             />
             <Route exact path='/category/:name'
               render={props => {
+                const { match: { params: { name: urlCategoryName } } } = props
                 const postIdsInCategory = Object.keys(this.props.posts.posts)
                   .filter((postKey) => {
-                    return this.props.posts.posts[postKey].category === props.match.params.name
+                    return this.props.posts.posts[postKey].category === urlCategoryName
                   })
                 return <PostList posts={this.props.posts} postIdsInCategory={postIdsInCategory} />
               }}
