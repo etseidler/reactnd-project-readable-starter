@@ -20,6 +20,10 @@
   padding: 0.5em 0;
   margin-bottom: 0.6em;
 }
+.category-item a {
+  color: #000;
+  text-decoration: none;
+}
 
 /* posts */
 
