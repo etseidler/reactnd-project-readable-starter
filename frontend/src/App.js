@@ -33,11 +33,11 @@ class App extends Component {
                 if (!this.props.categories.allNames.includes(urlCategoryName)) {
                   return <NotFound text="Category Not Found" />
                 }
-                const postIdsInCategory = Object.keys(this.props.posts.byId)
+                const idsOfPostsInCategory = Object.keys(this.props.posts.byId)
                   .filter((postKey) => {
                     return this.props.posts.byId[postKey].category === urlCategoryName
                   })
-                return <PostList posts={this.props.posts} postIdsInCategory={postIdsInCategory} />
+                return <PostList posts={this.props.posts} includeOnlyTheseIds={idsOfPostsInCategory} />
               }}
             />
             <Route
