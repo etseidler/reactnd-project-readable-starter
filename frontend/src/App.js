@@ -4,7 +4,7 @@ import { Route, Switch, Link, withRouter } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from './actions'
 import { getCategories, getPosts } from './utils/api'
 import CategoryList from './CategoryList'
-import ErrorPage from './ErrorPage'
+import NotFound from './NotFound'
 import PostList from './PostList'
 import './App.css'
 
@@ -36,7 +36,11 @@ class App extends Component {
                 return <PostList posts={this.props.posts} postIdsInCategory={postIdsInCategory} />
               }}
             />
-            <Route component={ErrorPage} />
+            <Route
+              render={() => (
+                <NotFound text='Page Not Found' />
+              )}
+            />
         </Switch>
       </div>
     );

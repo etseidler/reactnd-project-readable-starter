@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import NotFound from './NotFound'
 
 function PostList(props) {
   const { posts: { ids: postIds, posts }, postIdsInCategory } = props;
@@ -16,12 +16,7 @@ function PostList(props) {
           </div>
         ))
         :
-        <div className="page-not-found">
-          <div className="page-not-found__main-text">No Posts Found</div>
-          <div className="page-not-found__return-to-main">
-            <Link to='/'>Return to Main Page</Link>
-          </div>
-        </div>
+        <NotFound text="No Posts Found" />
       }
     </div>
   )

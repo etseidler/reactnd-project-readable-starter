@@ -64,17 +64,17 @@
   padding-top: 1em;
 }
 
-/* page not found */
+/* not found */
 
-.page-not-found {
+.not-found {
   text-align: center;
 }
 
-.page-not-found__main-text {
+.not-found__main-text {
   font-size: 2em;
   padding-top: 1em;
 }
 
-.page-not-found__return-to-main {
+.not-found__return-to-main {
   margin-top: 1em;
 }
