@@ -24,7 +24,7 @@ class App extends Component {
         <Switch>
             <Route exact path='/'
               render={() => (
-                <PostList posts={this.props.posts} />
+                <PostList postIds={this.props.posts.allIds} />
               )}
             />
             <Route exact path='/category/:name'
@@ -37,7 +37,7 @@ class App extends Component {
                   .filter((postKey) => {
                     return this.props.posts.byId[postKey].category === urlCategoryName
                   })
-                return <PostList posts={this.props.posts} includeOnlyTheseIds={idsOfPostsInCategory} />
+                return <PostList postIds={idsOfPostsInCategory} />
               }}
             />
             <Route
