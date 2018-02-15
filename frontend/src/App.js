@@ -13,6 +13,12 @@ class App extends Component {
     getCategories().then(this.props.fetchCategories)
     getPosts().then(this.props.fetchPosts)
   }
+  getIdsOfPostsInCategory(categoryName) {
+    return Object.keys(this.props.posts.byId)
+      .filter((postKey) => {
+        return this.props.posts.byId[postKey].category === categoryName
+      })
+  }
   render() {
     if (!this.props.categories || !this.props.posts.allIds) {
       return null
@@ -33,11 +39,7 @@ class App extends Component {
                 if (!this.props.categories.allNames.includes(urlCategoryName)) {
                   return <NotFound text="Category Not Found" />
                 }
-                const idsOfPostsInCategory = Object.keys(this.props.posts.byId)
-                  .filter((postKey) => {
-                    return this.props.posts.byId[postKey].category === urlCategoryName
-                  })
-                return <PostList postIds={idsOfPostsInCategory} />
+                return <PostList postIds={this.getIdsOfPostsInCategory(urlCategoryName)} />
               }}
             />
             <Route
