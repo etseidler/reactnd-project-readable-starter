@@ -21,7 +21,7 @@ class PostList extends Component {
     this.handleSortChange = this.handleSortChange.bind(this)
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ sortedIds: nextProps.postIds })
+    this.setState({ sortedIds: nextProps.postIds, sortOrder: 'disabled' })
   }
   sortDescending(first, second) {
     return first > second ? -1 : 1
