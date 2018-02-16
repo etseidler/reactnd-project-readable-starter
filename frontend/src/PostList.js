@@ -70,9 +70,9 @@ class PostList extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts: { byId: postsById } }) {
   return {
-    postsById: posts.byId
+    postsById
   }
 }
 
