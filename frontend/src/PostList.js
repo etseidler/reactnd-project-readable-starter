@@ -8,7 +8,7 @@ class PostList extends Component {
 
     this.state = {
       sortedIds: this.props.postIds,
-      sortOrder: ""
+      sortOrder: 'disabled'
     }
 
     this.sortValueToSortFunction = {
@@ -47,6 +47,7 @@ class PostList extends Component {
       <div className="post-list">
         <label>Sort By</label>
         <select onChange={this.handleSortChange} value={this.state.sortOrder} >
+          <option value='disabled' disabled>Select a Sort Order</option>
           <option value="voteScore">Vote Score</option>
           <option value="timestampDescending">Date (newest first)</option>
           <option value="timestampAscending">Date (oldest first)</option>
