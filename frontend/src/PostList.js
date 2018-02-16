@@ -31,7 +31,7 @@ class PostList extends Component {
   }
   handleSortChange({ target: { value: sortProp }}) {
     const { postsById } = this.props
-    const sortedIds = this.state.sortedIds.sort((a, b) => {
+    const sortedIds = this.state.sortedIds.slice().sort((a, b) => {
       const first = postsById[a][sortProp]
       const second = postsById[b][sortProp]
       return this.sortValueToSortFunction[sortProp](first, second)
