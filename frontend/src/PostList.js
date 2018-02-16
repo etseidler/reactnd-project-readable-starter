@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PostListSorter from './PostListSorter'
 import NotFound from './NotFound'
 
 class PostList extends Component {
@@ -45,15 +46,11 @@ class PostList extends Component {
     const { postsById } = this.props
     return (
       <div className="post-list">
-        <div className="post-list-sort-control">
-          <select onChange={this.handleSortChange} value={this.state.sortOrder} >
-            <option value="disabled" disabled>Select a Sort Order</option>
-            <option value="voteScore">Vote Score</option>
-            <option value="timestampDescending">Date (newest first)</option>
-            <option value="timestampAscending">Date (oldest first)</option>
-            <option value="title">Title</option>
-          </select>
-        </div>
+        <PostListSorter
+          onChange={this.handleSortChange}
+          sortOrder={this.state.sortOrder}
+          defaultValue='disabled'
+        />
         {this.state.sortedIds.length > 0
           ? this.state.sortedIds.map((postId) => {
             const { voteScore, title, commentCount } = postsById[postId]
