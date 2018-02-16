@@ -32,6 +32,9 @@
   display: flex;
   flex-direction: column;
 }
+.post-list-sort-control {
+  align-self: flex-end;
+}
 .post-item {
   padding: 1.25em 0;
   display: flex;

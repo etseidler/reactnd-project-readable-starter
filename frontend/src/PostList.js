@@ -45,14 +45,15 @@ class PostList extends Component {
     const { postsById } = this.props
     return (
       <div className="post-list">
-        <label>Sort By</label>
-        <select onChange={this.handleSortChange} value={this.state.sortOrder} >
-          <option value="disabled" disabled>Select a Sort Order</option>
-          <option value="voteScore">Vote Score</option>
-          <option value="timestampDescending">Date (newest first)</option>
-          <option value="timestampAscending">Date (oldest first)</option>
-          <option value="title">Title</option>
-        </select>
+        <div className="post-list-sort-control">
+          <select onChange={this.handleSortChange} value={this.state.sortOrder} >
+            <option value="disabled" disabled>Select a Sort Order</option>
+            <option value="voteScore">Vote Score</option>
+            <option value="timestampDescending">Date (newest first)</option>
+            <option value="timestampAscending">Date (oldest first)</option>
+            <option value="title">Title</option>
+          </select>
+        </div>
         {this.state.sortedIds.length > 0
           ? this.state.sortedIds.map((postId) => {
             const { voteScore, title, commentCount } = postsById[postId]
