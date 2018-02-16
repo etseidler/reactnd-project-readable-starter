@@ -8,17 +8,16 @@ class PostList extends Component {
     super(props)
 
     this.defaultSortValue = 'disabled'
-
-    this.state = {
-      sortedIds: this.props.postIds,
-      sortOrder: this.defaultSortValue
-    }
-
     this.sortValueToSortFunction = {
       'voteScore': this.sortDescending,
       'title': this.sortAscending,
       'timestampDescending': this.sortDescending,
       'timestampAscending': this.sortAscending
+    }
+
+    this.state = {
+      sortedIds: props.postIds,
+      sortOrder: this.defaultSortValue
     }
 
     this.handleSortChange = this.handleSortChange.bind(this)
