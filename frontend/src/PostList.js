@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostListSorter from './PostListSorter'
+import PostListItem from './PostListItem'
 import NotFound from './NotFound'
 
 class PostList extends Component {
@@ -53,16 +54,7 @@ class PostList extends Component {
           defaultValue={this.defaultSortValue}
         />
         {this.state.sortedIds.length > 0
-          ? this.state.sortedIds.map((postId) => {
-              const { voteScore, title, commentCount } = postsById[postId]
-              return (
-                <div key={postId} className="post-item">
-                  <div className="post-vote-score">{voteScore.toString().padStart(5)}</div>
-                  <div className="post-title">{title}</div>
-                  <div className="post-comment-count">{commentCount} comment(s)</div>
-                </div>
-              )
-            })
+          ? this.state.sortedIds.map(postId => <PostListItem key={postId} post={postsById[postId]} />)
           : <NotFound text="No Posts Found" />
         }
       </div>
