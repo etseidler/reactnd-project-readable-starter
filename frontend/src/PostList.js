@@ -7,9 +7,11 @@ class PostList extends Component {
   constructor(props) {
     super(props)
 
+    this.defaultSortValue = 'disabled'
+
     this.state = {
       sortedIds: this.props.postIds,
-      sortOrder: 'disabled'
+      sortOrder: this.defaultSortValue
     }
 
     this.sortValueToSortFunction = {
@@ -22,7 +24,7 @@ class PostList extends Component {
     this.handleSortChange = this.handleSortChange.bind(this)
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ sortedIds: nextProps.postIds, sortOrder: 'disabled' })
+    this.setState({ sortedIds: nextProps.postIds, sortOrder: this.defaultSortValue })
   }
   sortDescending(first, second) {
     return first > second ? -1 : 1
@@ -49,7 +51,7 @@ class PostList extends Component {
         <PostListSorter
           onChange={this.handleSortChange}
           sortOrder={this.state.sortOrder}
-          defaultValue='disabled'
+          defaultValue={this.defaultSortValue}
         />
         {this.state.sortedIds.length > 0
           ? this.state.sortedIds.map((postId) => {
