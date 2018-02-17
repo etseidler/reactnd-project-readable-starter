@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
 import {
   FETCH_CATEGORIES,
-  FETCH_POSTS
+  FETCH_POSTS,
+  DOWNVOTE,
+  UPVOTE
 } from '../actions'
 
 function categories(state = [], action) {
@@ -22,6 +24,8 @@ function categories(state = [], action) {
 }
 
 function posts(state = {}, action) {
+  const { id: postId } = action
+  const post = state && state.byId && state.byId[postId]
   switch (action.type) {
     case FETCH_POSTS:
       const allIds = action.posts.map(post => post.id)
@@ -32,6 +36,28 @@ function posts(state = {}, action) {
       return {
         byId,
         allIds
+      }
+    case DOWNVOTE:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [postId]: {
+            ...post,
+            voteScore: post.voteScore - 1
+          }
+        }
+      }
+    case UPVOTE:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [postId]: {
+            ...post,
+            voteScore: post.voteScore + 1
+          }
+        }
       }
     default:
       return state

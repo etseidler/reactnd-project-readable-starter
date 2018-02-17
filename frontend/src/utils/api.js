@@ -13,3 +13,27 @@ export function getPosts() {
     .then(res => res.json())
     .then(data => data)
 }
+
+export function downvotePost(id) {
+  headers['Content-Type'] = 'application/json'
+  const request = {
+    headers,
+    method: 'POST',
+    body: JSON.stringify({
+      option: 'downVote'
+    })
+  }
+  return fetch(`${BASE_URL}/posts/${id}`, request)
+}
+
+export function upvotePost(id) {
+  headers['Content-Type'] = 'application/json'
+  const request = {
+    headers,
+    method: 'POST',
+    body: JSON.stringify({
+      option: 'upVote'
+    })
+  }
+  return fetch(`${BASE_URL}/posts/${id}`, request)
+}
