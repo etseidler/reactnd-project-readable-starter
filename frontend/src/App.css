@@ -46,12 +46,30 @@
 .post-item:last-child {
   border-bottom: none;
 }
-.post-vote-score {
+.post-vote {
+  display: flex;
+  flex-direction: row;
   color: #BBB;
+  margin-right: 0.8em;  
+}
+.post-vote-score {
   font-size: large;
   font-weight: bold;
   white-space: pre;
-  margin-right: 0.8em;
+  align-self: center;
+}
+.post-vote-controls {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.25em;
+  position: relative;
+  top: 0.05em;
+}
+.post-vote-icon:active {
+  color: #000;
+}
+.post-vote-controls:hover {
+  cursor: pointer;
 }
 .post-title {
   font-size: larger;
