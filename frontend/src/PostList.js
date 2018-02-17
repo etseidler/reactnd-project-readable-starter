@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostListSorter from './PostListSorter'
-import PostListItem from './PostListItem'
+import Post from './Post'
 import NotFound from './NotFound'
 
 class PostList extends Component {
@@ -54,7 +54,7 @@ class PostList extends Component {
           defaultValue={this.defaultSortValue}
         />
         {this.state.sortedIds.length > 0
-          ? this.state.sortedIds.map(postId => <PostListItem key={postId} post={postsById[postId]} />)
+          ? this.state.sortedIds.map(postId => <Post key={postId} post={postsById[postId]} />)
           : <NotFound text="No Posts Found" />
         }
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function PostListItem({ post: { voteScore, title, commentCount } }) {
+function Post({ post: { voteScore, title, commentCount } }) {
   return (
     <div className="post-item">
       <div className="post-vote-score">{voteScore.toString().padStart(5)}</div>
@@ -10,4 +10,4 @@ function PostListItem({ post: { voteScore, title, commentCount } }) {
   )
 }
 
-export default PostListItem
+export default Post
