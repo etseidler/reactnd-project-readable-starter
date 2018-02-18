@@ -6,7 +6,7 @@ export function capitalize(str = '') {
 
 export function sortPostIds(postIds, postsById, sortOrder) {
   const sortProp = sortOrderMap[sortOrder].sortProp
-  return postIds.sort((a, b) => {
+  return postIds.slice().sort((a, b) => {
     const first = postsById[a][sortProp]
     const second = postsById[b][sortProp]
     return sortOrderMap[sortOrder].sortFunction(first, second)

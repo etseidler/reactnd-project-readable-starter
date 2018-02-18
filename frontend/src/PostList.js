@@ -19,14 +19,19 @@ class PostList extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.category !== nextProps.category) {
-      const sortedIds = sortPostIds(nextProps.postIds, this.props.postsById, this.props.sortOrder)
-      this.setState({ sortedIds })
+      if (this.props.sortOrder !== 'none') {
+        const sortedIds = sortPostIds(nextProps.postIds, this.props.postsById, this.props.sortOrder)
+        this.setState({ sortedIds })
+      }
+      else {
+        this.setState({ sortedIds: nextProps.postIds })
+      }
     }
   }
   handleSortChange({ target: { value: sortOrder }}) {
     this.props.updateSortOrder(sortOrder)
     const sortedIds = sortPostIds(
-      this.state.sortedIds.slice(),
+      this.state.sortedIds,
       this.props.postsById,
       sortOrder
     )
