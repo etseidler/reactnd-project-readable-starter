@@ -25,13 +25,12 @@ class PostList extends Component {
   }
   handleSortChange({ target: { value: sortOrder }}) {
     this.props.updateSortOrder(sortOrder)
-    this.setState({
-      sortedIds: sortPostIds(
-        this.state.sortedIds.slice(),
-        this.props.postsById,
-        sortOrder
-      )
-    })
+    const sortedIds = sortPostIds(
+      this.state.sortedIds.slice(),
+      this.props.postsById,
+      sortOrder
+    )
+    this.setState({ sortedIds })
   }
   render() {
     const { postsById, sortOrder } = this.props
