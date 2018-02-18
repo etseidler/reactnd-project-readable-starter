@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { updateSortOrder } from './actions'
+import { sortValuesMap } from './utils/helpers'
 import PostListSorter from './PostListSorter'
 import Post from './Post'
 import NotFound from './NotFound'
@@ -9,24 +10,7 @@ class PostList extends Component {
   constructor(props) {
     super(props)
 
-    this.sortValues = {
-      voteScore: {
-        sortFunction: this.sortDescending,
-        sortProp: 'voteScore'
-      },
-      title: {
-        sortFunction: this.sortAscending,
-        sortProp: 'title'
-      },
-      timestampAscending: {
-        sortFunction: this.sortAscending,
-        sortProp: 'timestamp'
-      },
-      timestampDescending: {
-        sortFunction: this.sortDescending,
-        sortProp: 'timestamp'
-      }
-    }
+    this.sortValues = sortValuesMap
 
     this.state = {
       sortedIds: props.postIds,
