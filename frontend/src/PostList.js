@@ -11,7 +11,7 @@ class PostList extends Component {
     super(props)
 
     this.state = {
-      sortedIds: props.postIds,
+      postIds: props.postIds,
       category: props.category
     }
 
@@ -21,21 +21,21 @@ class PostList extends Component {
     if (this.props.category !== nextProps.category) {
       if (this.props.sortOrder !== 'none') {
         const sortedIds = sortPostIds(nextProps.postIds, this.props.postsById, this.props.sortOrder)
-        this.setState({ sortedIds })
+        this.setState({ postIds: sortedIds })
       }
       else {
-        this.setState({ sortedIds: nextProps.postIds })
+        this.setState({ postIds: nextProps.postIds })
       }
     }
   }
   handleSortChange({ target: { value: sortOrder }}) {
     this.props.updateSortOrder(sortOrder)
     const sortedIds = sortPostIds(
-      this.state.sortedIds,
+      this.state.postIds,
       this.props.postsById,
       sortOrder
     )
-    this.setState({ sortedIds })
+    this.setState({ postIds: sortedIds })
   }
   render() {
     const { postsById, sortOrder } = this.props
@@ -45,8 +45,8 @@ class PostList extends Component {
           onChange={this.handleSortChange}
           sortOrder={sortOrder}
         />
-        {this.state.sortedIds.length > 0
-          ? this.state.sortedIds.map(postId => <Post key={postId} post={postsById[postId]} />)
+        {this.state.postIds.length > 0
+          ? this.state.postIds.map(postId => <Post key={postId} post={postsById[postId]} />)
           : <NotFound text="No Posts Found" />
         }
       </div>
