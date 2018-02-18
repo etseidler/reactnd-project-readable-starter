@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { updateSortOrder } from './actions'
 import PostListSorter from './PostListSorter'
 import Post from './Post'
 import NotFound from './NotFound'
@@ -8,23 +9,38 @@ class PostList extends Component {
   constructor(props) {
     super(props)
 
-    this.defaultSortValue = 'disabled'
-    this.sortValueToSortFunction = {
-      'voteScore': this.sortDescending,
-      'title': this.sortAscending,
-      'timestampDescending': this.sortDescending,
-      'timestampAscending': this.sortAscending
+    this.sortValues = {
+      voteScore: {
+        sortFunction: this.sortDescending,
+        sortProp: 'voteScore'
+      },
+      title: {
+        sortFunction: this.sortAscending,
+        sortProp: 'title'
+      },
+      timestampAscending: {
+        sortFunction: this.sortAscending,
+        sortProp: 'timestamp'
+      },
+      timestampDescending: {
+        sortFunction: this.sortDescending,
+        sortProp: 'timestamp'
+      }
     }
 
     this.state = {
       sortedIds: props.postIds,
-      sortOrder: this.defaultSortValue
+      category: props.category
     }
 
     this.handleSortChange = this.handleSortChange.bind(this)
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ sortedIds: nextProps.postIds, sortOrder: this.defaultSortValue })
+    if (this.props.category !== nextProps.category) {
+      this.setState({
+        sortedIds: this.sortPostIds(nextProps.postIds, this.props.sortOrder)
+      })
+    }
   }
   sortDescending(first, second) {
     return first > second ? -1 : 1
@@ -32,26 +48,28 @@ class PostList extends Component {
   sortAscending(first, second) {
     return first < second ? -1 : 1
   }
-  handleSortChange({ target: { value: sortProp }}) {
+  sortPostIds(postIds, sortOrder) {
+    const sortProp = this.sortValues[sortOrder].sortProp
     const { postsById } = this.props
-    const sortedIds = this.state.sortedIds.slice().sort((a, b) => {
+    return postIds.sort((a, b) => {
       const first = postsById[a][sortProp]
       const second = postsById[b][sortProp]
-      return this.sortValueToSortFunction[sortProp](first, second)
+      return this.sortValues[sortOrder].sortFunction(first, second)
     })
+  }
+  handleSortChange({ target: { value: sortOrder }}) {
+    this.props.updateSortOrder(sortOrder)
     this.setState({
-      sortedIds,
-      sortOrder: sortProp
+      sortedIds: this.sortPostIds(this.state.sortedIds.slice(), sortOrder)
     })
   }
   render() {
-    const { postsById } = this.props
+    const { postsById, sortOrder } = this.props
     return (
       <div className="post-list">
         <PostListSorter
           onChange={this.handleSortChange}
-          sortOrder={this.state.sortOrder}
-          defaultValue={this.defaultSortValue}
+          sortOrder={sortOrder}
         />
         {this.state.sortedIds.length > 0
           ? this.state.sortedIds.map(postId => <Post key={postId} post={postsById[postId]} />)
@@ -62,12 +80,20 @@ class PostList extends Component {
   }
 }
 
-function mapStateToProps({ posts: { byId: postsById } }) {
+function mapStateToProps({ posts: { byId: postsById, sortOrder } }) {
   return {
-    postsById
+    postsById,
+    sortOrder
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateSortOrder: sortOrder => dispatch(updateSortOrder(sortOrder))
   }
 }
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(PostList)

@@ -3,7 +3,8 @@ import {
   FETCH_CATEGORIES,
   FETCH_POSTS,
   DOWNVOTE,
-  UPVOTE
+  UPVOTE,
+  UPDATE_SORT_ORDER
 } from '../actions'
 
 const defaultCategoryState = {
@@ -31,7 +32,7 @@ function categories(state = defaultCategoryState, action) {
 const defaultPostState = {
   byId: {},
   allIds: [],
-  sortOrder: undefined
+  sortOrder: 'none'
 }
 
 function posts(state = defaultPostState, action) {
@@ -45,6 +46,7 @@ function posts(state = defaultPostState, action) {
         return acc
       }, {})
       return {
+        ...state,
         byId,
         allIds
       }
@@ -69,6 +71,11 @@ function posts(state = defaultPostState, action) {
             voteScore: post.voteScore + 1
           }
         }
+      }
+    case UPDATE_SORT_ORDER:
+      return {
+        ...state,
+        sortOrder: action.sortOrder
       }
     default:
       return state

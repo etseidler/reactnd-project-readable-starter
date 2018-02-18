@@ -32,7 +32,7 @@ class App extends Component {
         <Switch>
             <Route exact path='/'
               render={() => (
-                <PostList postIds={this.props.posts.allIds} />
+                <PostList postIds={this.props.posts.allIds} category='all' />
               )}
             />
             <Route exact path='/category/:name'
@@ -41,7 +41,7 @@ class App extends Component {
                 if (!this.props.categories.allNames.includes(urlCategoryName)) {
                   return <NotFound text="Category Not Found" />
                 }
-                return <PostList postIds={this.getIdsOfPostsInCategory(urlCategoryName)} />
+                return <PostList postIds={this.getIdsOfPostsInCategory(urlCategoryName)} category={urlCategoryName} />
               }}
             />
             <Route
