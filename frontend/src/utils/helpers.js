@@ -12,7 +12,7 @@ function sortAscending(first, second) {
   return first < second ? -1 : 1
 }
 
-export const sortValuesMap = {
+const sortValuesMap = {
   voteScore: {
     sortFunction: sortDescending,
     sortProp: 'voteScore'
@@ -29,4 +29,13 @@ export const sortValuesMap = {
     sortFunction: sortDescending,
     sortProp: 'timestamp'
   }
+}
+
+export function sortPostIds(postIds, postsById, sortOrder) {
+  const sortProp = sortValuesMap[sortOrder].sortProp
+  return postIds.sort((a, b) => {
+    const first = postsById[a][sortProp]
+    const second = postsById[b][sortProp]
+    return sortValuesMap[sortOrder].sortFunction(first, second)
+  })
 }
