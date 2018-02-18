@@ -1,7 +1,6 @@
 import React from 'react'
 
-function PostListSorter(props) {
-  const { onChange, sortOrder } = props
+function PostListSorter({ onChange, sortOrder}) {
   return (
     <div className="post-list-sort-control">
       <select onChange={onChange} value={sortOrder} >
