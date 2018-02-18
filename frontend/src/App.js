@@ -20,7 +20,9 @@ class App extends Component {
       })
   }
   render() {
-    if (!this.props.categories || !this.props.posts.allIds) {
+    const noCategories = this.props.categories.allNames.length === 0
+    const noIds = this.props.posts.allIds.length === 0
+    if (noCategories || noIds) {
       return null
     }
     return (

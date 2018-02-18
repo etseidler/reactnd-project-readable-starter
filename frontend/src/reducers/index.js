@@ -6,7 +6,12 @@ import {
   UPVOTE
 } from '../actions'
 
-function categories(state = [], action) {
+const defaultCategoryState = {
+  byName: {},
+  allNames: []
+}
+
+function categories(state = defaultCategoryState, action) {
   switch (action.type) {
     case FETCH_CATEGORIES:
       const allNames = action.categories.map(category => category.name)
@@ -23,7 +28,13 @@ function categories(state = [], action) {
   }
 }
 
-function posts(state = {}, action) {
+const defaultPostState = {
+  byId: {},
+  allIds: [],
+  sortOrder: undefined
+}
+
+function posts(state = defaultPostState, action) {
   const { id: postId } = action
   const post = state && state.byId && state.byId[postId]
   switch (action.type) {
