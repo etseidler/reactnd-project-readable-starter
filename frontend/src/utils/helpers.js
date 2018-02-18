@@ -4,6 +4,15 @@ export function capitalize(str = '') {
     : str[0].toUpperCase() + str.slice(1)
 }
 
+export function sortPostIds(postIds, postsById, sortOrder) {
+  const sortProp = sortOrderMap[sortOrder].sortProp
+  return postIds.sort((a, b) => {
+    const first = postsById[a][sortProp]
+    const second = postsById[b][sortProp]
+    return sortOrderMap[sortOrder].sortFunction(first, second)
+  })
+}
+
 function sortDescending(first, second) {
   return first > second ? -1 : 1
 }
@@ -29,13 +38,4 @@ const sortOrderMap = {
     sortFunction: sortDescending,
     sortProp: 'timestamp'
   }
-}
-
-export function sortPostIds(postIds, postsById, sortOrder) {
-  const sortProp = sortOrderMap[sortOrder].sortProp
-  return postIds.sort((a, b) => {
-    const first = postsById[a][sortProp]
-    const second = postsById[b][sortProp]
-    return sortOrderMap[sortOrder].sortFunction(first, second)
-  })
 }
