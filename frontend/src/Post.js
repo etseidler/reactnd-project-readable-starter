@@ -15,7 +15,7 @@ class Post extends Component {
     return (
       <div className="post-item">
         <div className="post-vote">
-        <div className="post-vote-score">{voteScore.toString().padStart(5)}</div>
+          <div className="post-vote-score">{voteScore.toString().padStart(5)}</div>
           <div className="post-vote-controls">
             <i className="post-vote-icon icon ion-arrow-up-a" onClick={() => this.upvote(id)}></i>
             <i className="post-vote-icon icon ion-arrow-down-a" onClick={() => this.downvote(id)}></i>
