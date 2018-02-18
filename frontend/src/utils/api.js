@@ -15,24 +15,20 @@ export function getPosts() {
 }
 
 export function downvotePost(id) {
-  headers['Content-Type'] = 'application/json'
-  const request = {
-    headers,
-    method: 'POST',
-    body: JSON.stringify({
-      option: 'downVote'
-    })
-  }
-  return fetch(`${BASE_URL}/posts/${id}`, request)
+  return votePost(id, 'downVote')
 }
 
 export function upvotePost(id) {
+  return votePost(id, 'upVote')
+}
+
+function votePost(id, option) {
   headers['Content-Type'] = 'application/json'
   const request = {
     headers,
     method: 'POST',
     body: JSON.stringify({
-      option: 'upVote'
+      option
     })
   }
   return fetch(`${BASE_URL}/posts/${id}`, request)
