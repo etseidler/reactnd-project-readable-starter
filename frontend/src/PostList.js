@@ -11,8 +11,7 @@ class PostList extends Component {
     super(props)
 
     this.state = {
-      postIds: props.postIds,
-      category: props.category
+      postIds: props.postIds
     }
 
     this.handleSortChange = this.handleSortChange.bind(this)
@@ -28,7 +27,7 @@ class PostList extends Component {
       }
     }
   }
-  handleSortChange({ target: { value: sortOrder }}) {
+  handleSortChange({ target: { value: sortOrder } }) {
     this.props.updateSortOrder(sortOrder)
     const sortedIds = sortPostIds(
       this.state.postIds,
@@ -40,7 +39,8 @@ class PostList extends Component {
   render() {
     const { postsById, sortOrder } = this.props
     return this.state.postIds.length > 0
-      ? <div className="post-list">
+      ?
+        <div className="post-list">
           <PostListSorter
             onChange={this.handleSortChange}
             sortOrder={sortOrder}

@@ -1,3 +1,5 @@
+/* globals fetch */
+/* eslint no-use-before-define: "off" */
 const AUTHORIZATION_HEADER = 'udacity-readable-eric-seidler'
 const headers = { Authorization: AUTHORIZATION_HEADER }
 const BASE_URL = 'http://localhost:3001'

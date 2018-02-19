@@ -15,9 +15,7 @@ class App extends Component {
   }
   getIdsOfPostsInCategory(categoryName) {
     return Object.keys(this.props.posts.byId)
-      .filter((postKey) => {
-        return this.props.posts.byId[postKey].category === categoryName
-      })
+      .filter(postKey => this.props.posts.byId[postKey].category === categoryName)
   }
   render() {
     const noCategories = this.props.categories.allNames.length === 0
@@ -30,25 +28,30 @@ class App extends Component {
         <div className="title-bar"><Link to="/">Readable</Link></div>
         <CategoryList categories={this.props.categories} />
         <Switch>
-            <Route exact path='/'
-              render={() => (
-                <PostList postIds={this.props.posts.allIds} category='all' />
-              )}
-            />
-            <Route exact path='/category/:name'
-              render={props => {
-                const { match: { params: { name: urlCategoryName } } } = props
-                if (!this.props.categories.allNames.includes(urlCategoryName)) {
-                  return <NotFound text="Category Not Found" />
-                }
-                return <PostList postIds={this.getIdsOfPostsInCategory(urlCategoryName)} category={urlCategoryName} />
-              }}
-            />
-            <Route
-              render={() => (
-                <NotFound text='Page Not Found' />
-              )}
-            />
+          <Route exact path="/"
+            render={() => (
+              <PostList postIds={this.props.posts.allIds} category="all" />
+            )}
+          />
+          <Route exact path="/category/:name"
+            render={(props) => {
+              const { match: { params: { name: urlCategoryName } } } = props
+              if (!this.props.categories.allNames.includes(urlCategoryName)) {
+                return <NotFound text="Category Not Found" />
+              }
+              return (
+                <PostList
+                  postIds={this.getIdsOfPostsInCategory(urlCategoryName)}
+                  category={urlCategoryName}
+                />
+              )
+            }}
+          />
+          <Route
+            render={() => (
+              <NotFound text="Page Not Found" />
+            )}
+          />
         </Switch>
       </div>
     )

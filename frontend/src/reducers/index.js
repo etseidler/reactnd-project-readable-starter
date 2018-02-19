@@ -14,7 +14,7 @@ const defaultCategoryState = {
 
 function categories(state = defaultCategoryState, action) {
   switch (action.type) {
-    case FETCH_CATEGORIES:
+    case FETCH_CATEGORIES: {
       const allNames = action.categories.map(category => category.name)
       const byName = action.categories.reduce((acc, cur) => {
         acc[cur.name] = cur
@@ -24,6 +24,7 @@ function categories(state = defaultCategoryState, action) {
         byName,
         allNames
       }
+    }
     default:
       return state
   }
@@ -39,8 +40,8 @@ function posts(state = defaultPostState, action) {
   const { id: postId } = action
   const post = state && state.byId && state.byId[postId]
   switch (action.type) {
-    case FETCH_POSTS:
-      const allIds = action.posts.map(post => post.id)
+    case FETCH_POSTS: {
+      const allIds = action.posts.map(p => p.id)
       const byId = action.posts.reduce((acc, cur) => {
         acc[cur.id] = cur
         return acc
@@ -50,6 +51,7 @@ function posts(state = defaultPostState, action) {
         byId,
         allIds
       }
+    }
     case DOWNVOTE:
       return {
         ...state,

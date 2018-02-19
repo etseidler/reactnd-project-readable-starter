@@ -1,3 +1,4 @@
+/* eslint no-use-before-define: "off" */
 export function capitalize(str = '') {
   return typeof str !== 'string'
     ? ''
@@ -5,7 +6,7 @@ export function capitalize(str = '') {
 }
 
 export function sortPostIds(postIds, postsById, sortOrder) {
-  const sortProp = sortOrderMap[sortOrder].sortProp
+  const { [sortOrder]: { sortProp } } = sortOrderMap
   return postIds.slice().sort((a, b) => {
     const first = postsById[a][sortProp]
     const second = postsById[b][sortProp]
