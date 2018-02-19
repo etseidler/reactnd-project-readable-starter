@@ -39,18 +39,15 @@ class PostList extends Component {
   }
   render() {
     const { postsById, sortOrder } = this.props
-    return (
-      <div className="post-list">
-        <PostListSorter
-          onChange={this.handleSortChange}
-          sortOrder={sortOrder}
-        />
-        {this.state.postIds.length > 0
-          ? this.state.postIds.map(postId => <Post key={postId} post={postsById[postId]} />)
-          : <NotFound text="No Posts Found" />
-        }
-      </div>
-    )
+    return this.state.postIds.length > 0
+      ? <div className="post-list">
+          <PostListSorter
+            onChange={this.handleSortChange}
+            sortOrder={sortOrder}
+          />
+          {this.state.postIds.map(postId => <Post key={postId} post={postsById[postId]} />)}
+        </div>
+      : <NotFound text="No Posts Found" />
   }
 }
 
