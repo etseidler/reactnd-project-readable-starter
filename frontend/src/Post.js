@@ -22,7 +22,7 @@ class Post extends Component {
           </div>
         </div>
         <div className="post-title">{title}</div>
-        <div className="post-comment-count">{commentCount} comment(s)</div>
+        <div className="post-comment-count">{commentCount} comment{commentCount !== 1 ? 's' : ''}</div>
       </div>
     )
   }
