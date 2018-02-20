@@ -51,7 +51,10 @@ class PostList extends Component {
       : <NotFound text="No Posts Found" />
     return (
       <div className="post-list-container">
-        <i className="post-add-icon icon ion-plus-circled" onClick={() => {}} />
+        <i
+          className="post-add-icon icon ion-plus-circled"
+          onClick={() => this.setState({ addPostModalOpen: true })}
+        />
         {mainContent}
       </div>
     )
