@@ -88,6 +88,39 @@
   color: #444;
 }
 
+/* modal */
+.modal-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+.modal-header {
+  text-align: center;
+  font-size: x-large;
+  height: 30px;
+  padding: 10px 0 10px;
+  background-color: #CCC;
+}
+.modal-body {
+  flex: 1;
+  text-align: center;
+  font-size: x-large;
+}
+.modal-footer {
+  text-align: center;
+  height: 30px;
+  font-size: x-large;
+  padding-bottom: 10px;
+}
+.modal-dismiss-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: large;
+  color: #444;
+  cursor: pointer;
+}
+
 /* not found */
 
 .not-found {

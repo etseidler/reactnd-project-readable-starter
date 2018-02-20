@@ -1,5 +1,8 @@
+/* globals document */
+/* eslint no-use-before-define: "off" */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Modal from 'react-modal'
 import { updateSortOrder } from './actions'
 import { sortPostIds } from './utils/helpers'
 import PostListSorter from './PostListSorter'
@@ -11,7 +14,8 @@ class PostList extends Component {
     super(props)
 
     this.state = {
-      postIds: props.postIds
+      postIds: props.postIds,
+      addPostModalOpen: false
     }
 
     this.handleSortChange = this.handleSortChange.bind(this)
@@ -56,8 +60,32 @@ class PostList extends Component {
           onClick={() => this.setState({ addPostModalOpen: true })}
         />
         {mainContent}
+        <Modal
+          appElement={document.getElementById('root')}
+          isOpen={this.state.addPostModalOpen}
+          style={modalStyles}
+        >
+          <div className="modal-container">
+            <div className="modal-header">Add New Post</div>
+            <div className="modal-body">[Insert form here]</div>
+            <div className="modal-footer">[Insert button(s) here]</div>
+          </div>
+          <i
+            className="modal-dismiss-icon icon ion-close"
+            onClick={() => this.setState({ addPostModalOpen: false })}
+          />
+        </Modal>
       </div>
     )
+  }
+}
+
+const modalStyles = {
+  content: {
+    padding: '0px'
+  },
+  overlay: {
+    backgroundColor: 'rgba(100, 100, 100, 0.75)'
   }
 }
 
