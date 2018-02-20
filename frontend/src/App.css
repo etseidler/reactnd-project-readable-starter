@@ -79,6 +79,14 @@
   color: #888;
   font-weight: bold;
 }
+.post-add-icon {
+  position: fixed;
+  bottom: 1em;
+  right: 1.25em;
+  font-size: xx-large;
+  cursor: pointer;
+  color: #444;
+}
 
 /* not found */
 

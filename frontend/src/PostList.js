@@ -38,8 +38,8 @@ class PostList extends Component {
   }
   render() {
     const { postsById, sortOrder } = this.props
-    return this.state.postIds.length > 0
-      ?
+    const mainContent = this.state.postIds.length > 0
+      ? (
         <div className="post-list">
           <PostListSorter
             onChange={this.handleSortChange}
@@ -47,7 +47,14 @@ class PostList extends Component {
           />
           {this.state.postIds.map(postId => <Post key={postId} post={postsById[postId]} />)}
         </div>
+      )
       : <NotFound text="No Posts Found" />
+    return (
+      <div className="post-list-container">
+        <i className="post-add-icon icon ion-plus-circled" onClick={() => {}} />
+        {mainContent}
+      </div>
+    )
   }
 }
 
