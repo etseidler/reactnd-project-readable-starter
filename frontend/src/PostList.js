@@ -154,12 +154,12 @@ class PostList extends Component {
               </div>
             </div>
             <div className="modal-footer">
-              <div
+              <button
                 className="new-post-submit"
                 onClick={this.submitNewPost}
               >
                 Submit
-              </div>
+              </button>
             </div>
           </div>
           <i
