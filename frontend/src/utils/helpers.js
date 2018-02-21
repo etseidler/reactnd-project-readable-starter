@@ -22,21 +22,25 @@ function sortAscending(first, second) {
   return first < second ? -1 : 1
 }
 
-const sortOrderMap = {
+export const sortOrderMap = {
   voteScore: {
     sortFunction: sortDescending,
-    sortProp: 'voteScore'
+    sortProp: 'voteScore',
+    sortDisplayValue: 'Vote Score'
   },
   title: {
     sortFunction: sortAscending,
-    sortProp: 'title'
+    sortProp: 'title',
+    sortDisplayValue: 'Title'
   },
   timestampAscending: {
     sortFunction: sortAscending,
-    sortProp: 'timestamp'
+    sortProp: 'timestamp',
+    sortDisplayValue: 'Date (oldest first)'
   },
   timestampDescending: {
     sortFunction: sortDescending,
-    sortProp: 'timestamp'
+    sortProp: 'timestamp',
+    sortDisplayValue: 'Date (newest first)'
   }
 }
