@@ -39,11 +39,13 @@ class PostList extends Component {
     )
     this.setState({ postIds: sortedIds })
   }
-  afterPostSubmit(newPostId) {
-    this.setState({
-      postIds: [...this.state.postIds, newPostId],
-      addPostModalOpen: false
-    })
+  afterPostSubmit(newPost) {
+    const addNewPostToList = newPost.category === this.props.category ||
+      this.props.category === 'all'
+    if (addNewPostToList) {
+      this.setState({ postIds: [...this.state.postIds, newPost.id] })
+    }
+    this.setState({ addPostModalOpen: false })
   }
   render() {
     const { postsById, sortOrder } = this.props
@@ -67,6 +69,7 @@ class PostList extends Component {
         {mainContent}
         <PostModal
           modalTitleText="Add New Post"
+          category={this.props.category === 'all' ? undefined : this.props.category}
           isOpen={this.state.addPostModalOpen}
           onDismiss={() => this.setState({ addPostModalOpen: false })}
           afterSubmit={this.afterPostSubmit}

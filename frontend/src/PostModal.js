@@ -16,7 +16,8 @@ class PostModal extends Component {
       isOpen: props.isOpen,
       title: '',
       author: '',
-      category: firstCategoryName,
+      category: props.category || firstCategoryName,
+      firstCategoryName,
       body: '',
       submitDisabled: true
     }
@@ -24,6 +25,11 @@ class PostModal extends Component {
     this.handleFieldChange = this.handleFieldChange.bind(this)
     this.validateFormFields = this.validateFormFields.bind(this)
     this.submitNewPost = this.submitNewPost.bind(this)
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.category !== this.state.category) {
+      this.setState({ category: nextProps.category })
+    }
   }
   validateFormFields() {
     const fieldsToValidate = ['title', 'author', 'body']
@@ -57,10 +63,9 @@ class PostModal extends Component {
         this.setState({
           title: '',
           author: '',
-          category: this.state.firstCategoryName,
           body: ''
         })
-        this.props.afterSubmit(post.id)
+        this.props.afterSubmit(post)
       })
   }
   render() {
