@@ -30,7 +30,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/"
             render={() => (
-              <PostList postIds={this.props.posts.allIds} category="all" />
+              <PostList postIds={this.props.posts.allIds} />
             )}
           />
           <Route exact path="/category/:name"
