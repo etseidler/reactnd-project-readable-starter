@@ -14,13 +14,15 @@ import NotFound from './NotFound'
 class PostList extends Component {
   constructor(props) {
     super(props)
+    const firstCategoryName = props.categories.allNames[0]
 
     this.state = {
       postIds: props.postIds,
       addPostModalOpen: false,
       title: '',
       author: '',
-      category: 'react',
+      category: firstCategoryName,
+      firstCategoryName,
       body: ''
     }
 
@@ -70,7 +72,7 @@ class PostList extends Component {
           addPostModalOpen: false,
           title: '',
           author: '',
-          category: 'react',
+          category: this.state.firstCategoryName,
           body: '',
           postIds: [...this.state.postIds, post.id]
         })
@@ -179,10 +181,11 @@ const modalStyles = {
   }
 }
 
-function mapStateToProps({ posts: { byId: postsById, sortOrder } }) {
+function mapStateToProps({ posts: { byId: postsById, sortOrder }, categories }) {
   return {
     postsById,
-    sortOrder
+    sortOrder,
+    categories
   }
 }
 
