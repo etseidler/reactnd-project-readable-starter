@@ -67,8 +67,37 @@ class PostList extends Component {
         >
           <div className="modal-container">
             <div className="modal-header">Add New Post</div>
-            <div className="modal-body">[Insert form here]</div>
-            <div className="modal-footer">[Insert button(s) here]</div>
+            <div className="modal-body">
+              <div className="new-post-form">
+                <label htmlFor="new-post-title">
+                  Title
+                  <br />
+                  <input name="title" id="new-post-title" />
+                </label>
+                <label htmlFor="new-post-author">
+                  Author
+                  <br />
+                  <input name="author" id="new-post-author" />
+                </label>
+                <label htmlFor="new-post-body">
+                  Category
+                  <br />
+                  <select name="category" id="new-post-category">
+                    <option value="react">React</option>
+                    <option value="redux">Redux</option>
+                    <option value="udacity">Udacity</option>
+                  </select>
+                </label>
+                <label htmlFor="new-post-body">
+                  Post
+                  <br />
+                  <textarea name="body" id="new-post-body" />
+                </label>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <div className="new-post-submit">Submit</div>
+            </div>
           </div>
           <i
             className="modal-dismiss-icon icon ion-close"
