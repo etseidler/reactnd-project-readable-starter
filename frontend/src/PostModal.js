@@ -6,6 +6,7 @@ import Modal from 'react-modal'
 import uuid from 'uuid/v4'
 import { addNewPost } from './actions'
 import { createNewPost } from './utils/api'
+import { capitalize } from './utils/helpers'
 
 class PostModal extends Component {
   constructor(props) {
@@ -108,9 +109,13 @@ class PostModal extends Component {
                   value={this.state.category}
                   onChange={this.handleFieldChange}
                 >
-                  <option value="react">React</option>
-                  <option value="redux">Redux</option>
-                  <option value="udacity">Udacity</option>
+                  {this.props.categories.allNames
+                    .map(categoryName => (
+                      <option key={categoryName} value={categoryName}>
+                        {capitalize(categoryName)}
+                      </option>
+                    ))
+                  }
                 </select>
               </label>
               <label htmlFor="new-post-body">
