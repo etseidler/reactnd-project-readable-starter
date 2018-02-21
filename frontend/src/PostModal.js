@@ -28,7 +28,7 @@ class PostModal extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.category !== this.state.category) {
-      this.setState({ category: nextProps.category })
+      this.setState({ category: nextProps.category || this.state.firstCategoryName })
     }
   }
   validateFormFields() {
