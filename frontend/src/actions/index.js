@@ -1,5 +1,6 @@
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
 export const FETCH_POSTS = 'FETCH_POSTS'
+export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const DOWNVOTE = 'DOWNVOTE'
 export const UPVOTE = 'UPVOTE'
 export const UPDATE_SORT_ORDER = 'UPDATE_SORT_ORDER'
@@ -15,6 +16,13 @@ export function fetchPosts(posts) {
   return {
     type: FETCH_POSTS,
     posts
+  }
+}
+
+export function addNewPost(post) {
+  return {
+    type: ADD_NEW_POST,
+    post
   }
 }
 

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import {
   FETCH_CATEGORIES,
   FETCH_POSTS,
+  ADD_NEW_POST,
   DOWNVOTE,
   UPVOTE,
   UPDATE_SORT_ORDER
@@ -52,6 +53,18 @@ function posts(state = defaultPostState, action) {
         allIds
       }
     }
+    case ADD_NEW_POST:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.post.id]: action.post
+        },
+        allIds: [
+          ...state.allIds,
+          action.post.id
+        ]
+      }
     case DOWNVOTE:
       return {
         ...state,

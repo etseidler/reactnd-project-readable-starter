@@ -3,8 +3,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
-import { updateSortOrder } from './actions'
+import uuid from 'uuid/v4'
+import { updateSortOrder, addNewPost } from './actions'
 import { sortPostIds } from './utils/helpers'
+import { createNewPost } from './utils/api'
 import PostListSorter from './PostListSorter'
 import Post from './Post'
 import NotFound from './NotFound'
@@ -15,10 +17,16 @@ class PostList extends Component {
 
     this.state = {
       postIds: props.postIds,
-      addPostModalOpen: false
+      addPostModalOpen: false,
+      title: '',
+      author: '',
+      category: 'react',
+      body: ''
     }
 
     this.handleSortChange = this.handleSortChange.bind(this)
+    this.handleFieldChange = this.handleFieldChange.bind(this)
+    this.submitNewPost = this.submitNewPost.bind(this)
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.category !== nextProps.category) {
@@ -39,6 +47,34 @@ class PostList extends Component {
       sortOrder
     )
     this.setState({ postIds: sortedIds })
+  }
+  handleFieldChange({ target: { name, value } }) {
+    this.setState({
+      [name]: value
+    });
+  }
+  submitNewPost() {
+    const { title, author, category, body } = this.state
+    const newPostData = {
+      timestamp: Date.now(),
+      id: uuid(),
+      title,
+      author,
+      category,
+      body
+    }
+    createNewPost(newPostData)
+      .then((post) => {
+        this.props.addNewPost(post)
+        this.setState({
+          addPostModalOpen: false,
+          title: '',
+          author: '',
+          category: 'react',
+          body: '',
+          postIds: [...this.state.postIds, post.id]
+        })
+      })
   }
   render() {
     const { postsById, sortOrder } = this.props
@@ -72,17 +108,32 @@ class PostList extends Component {
                 <label htmlFor="new-post-title">
                   Title
                   <br />
-                  <input name="title" id="new-post-title" />
+                  <input
+                    name="title"
+                    value={this.state.title}
+                    onChange={this.handleFieldChange}
+                    id="new-post-title"
+                  />
                 </label>
                 <label htmlFor="new-post-author">
                   Author
                   <br />
-                  <input name="author" id="new-post-author" />
+                  <input
+                    name="author"
+                    id="new-post-author"
+                    value={this.state.author}
+                    onChange={this.handleFieldChange}
+                  />
                 </label>
                 <label htmlFor="new-post-body">
                   Category
                   <br />
-                  <select name="category" id="new-post-category">
+                  <select
+                    name="category"
+                    id="new-post-category"
+                    value={this.state.category}
+                    onChange={this.handleFieldChange}
+                  >
                     <option value="react">React</option>
                     <option value="redux">Redux</option>
                     <option value="udacity">Udacity</option>
@@ -91,12 +142,22 @@ class PostList extends Component {
                 <label htmlFor="new-post-body">
                   Post
                   <br />
-                  <textarea name="body" id="new-post-body" />
+                  <textarea
+                    name="body"
+                    id="new-post-body"
+                    value={this.state.body}
+                    onChange={this.handleFieldChange}
+                  />
                 </label>
               </div>
             </div>
             <div className="modal-footer">
-              <div className="new-post-submit">Submit</div>
+              <div
+                className="new-post-submit"
+                onClick={this.submitNewPost}
+              >
+                Submit
+              </div>
             </div>
           </div>
           <i
@@ -127,7 +188,8 @@ function mapStateToProps({ posts: { byId: postsById, sortOrder } }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateSortOrder: sortOrder => dispatch(updateSortOrder(sortOrder))
+    updateSortOrder: sortOrder => dispatch(updateSortOrder(sortOrder)),
+    addNewPost: post => dispatch(addNewPost(post))
   }
 }
 
