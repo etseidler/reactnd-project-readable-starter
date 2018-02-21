@@ -128,7 +128,6 @@
   display: flex;
   flex-direction: column;
   align-content: space-around;
-  /* align-items: left; */
 }
 .new-post-form label {
   text-align: left;
