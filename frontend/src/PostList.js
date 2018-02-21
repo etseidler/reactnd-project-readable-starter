@@ -23,11 +23,13 @@ class PostList extends Component {
       author: '',
       category: firstCategoryName,
       firstCategoryName,
-      body: ''
+      body: '',
+      submitDisabled: true
     }
 
     this.handleSortChange = this.handleSortChange.bind(this)
     this.handleFieldChange = this.handleFieldChange.bind(this)
+    this.validateFormFields = this.validateFormFields.bind(this)
     this.submitNewPost = this.submitNewPost.bind(this)
   }
   componentWillReceiveProps(nextProps) {
@@ -50,10 +52,21 @@ class PostList extends Component {
     )
     this.setState({ postIds: sortedIds })
   }
+  validateFormFields() {
+    const fieldsToValidate = ['title', 'author', 'body']
+    let submitDisabled = false
+    fieldsToValidate.forEach((field) => {
+      if (this.state[field].length === 0) {
+        submitDisabled = true
+      }
+    })
+    this.setState({ submitDisabled })
+  }
   handleFieldChange({ target: { name, value } }) {
-    this.setState({
-      [name]: value
-    });
+    this.setState(
+      { [name]: value },
+      this.validateFormFields
+    );
   }
   submitNewPost() {
     const { title, author, category, body } = this.state
@@ -157,6 +170,7 @@ class PostList extends Component {
               <button
                 className="new-post-submit"
                 onClick={this.submitNewPost}
+                disabled={this.state.submitDisabled}
               >
                 Submit
               </button>

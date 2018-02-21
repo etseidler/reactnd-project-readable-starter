@@ -154,6 +154,9 @@
   cursor: pointer;
   font-size: inherit;
 }
+.new-post-submit:disabled {
+  border: 1px solid rgba(0,0,0,.25)
+}
 
 /* not found */
 
