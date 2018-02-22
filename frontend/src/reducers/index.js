@@ -3,7 +3,7 @@ import {
   FETCH_CATEGORIES,
   FETCH_POSTS,
   ADD_NEW_POST,
-  DOWNVOTE,
+  DOWNVOTE_POST,
   UPVOTE,
   DELETE_POST,
   UPDATE_SORT_ORDER
@@ -66,7 +66,7 @@ function posts(state = defaultPostState, action) {
           action.post.id
         ]
       }
-    case DOWNVOTE:
+    case DOWNVOTE_POST:
       return {
         ...state,
         byId: {

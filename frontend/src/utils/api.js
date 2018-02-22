@@ -16,7 +16,7 @@ export function getPosts() {
     .then(data => data)
 }
 
-export function downvotePost(id) {
+export function downvotePostRequest(id) {
   return votePost(id, 'downVote')
 }
 

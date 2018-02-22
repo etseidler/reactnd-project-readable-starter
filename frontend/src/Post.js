@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { downvote, upvote, deletePost } from './actions'
-import { downvotePost, upvotePost, deletePostRequest } from './utils/api'
+import { downvotePost, upvote, deletePost } from './actions'
+import { downvotePostRequest, upvotePost, deletePostRequest } from './utils/api'
 
 class Post extends Component {
   downvote(id) {
-    downvotePost(id).then(() => this.props.downvote(id))
+    downvotePostRequest(id).then(() => this.props.downvote(id))
   }
   upvote(id) {
     upvotePost(id).then(() => this.props.upvote(id))
@@ -48,7 +48,7 @@ class Post extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    downvote: id => dispatch(downvote(id)),
+    downvote: id => dispatch(downvotePost(id)),
     upvote: id => dispatch(upvote(id)),
     delete: id => dispatch(deletePost(id))
   }
