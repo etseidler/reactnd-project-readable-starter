@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import uuid from 'uuid/v4'
-import { addNewPost } from './actions'
+import { addNewPost, closeModal } from './actions'
 import { createNewPost } from './utils/api'
 import { capitalize } from './utils/helpers'
 
@@ -76,7 +76,7 @@ class PostModal extends Component {
       .then((post) => {
         this.props.addNewPost(post)
         this.resetFormState()
-        this.props.afterSubmit(post)
+        this.props.onDismiss()
       })
   }
   render() {
@@ -87,7 +87,7 @@ class PostModal extends Component {
         style={modalStyles}
       >
         <div className="modal-container">
-          <div className="modal-header">{this.props.modalTitleText}</div>
+          <div className="modal-header">{this.props.titleText}</div>
           <div className="modal-body">
             <div className="new-post-form">
               <label htmlFor="new-post-title">
@@ -168,15 +168,18 @@ const modalStyles = {
   }
 }
 
-function mapStateToProps({ categories }) {
+function mapStateToProps({ categories, modal: { titleText, category } }) {
   return {
-    categories
+    categories,
+    titleText,
+    category
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addNewPost: post => dispatch(addNewPost(post))
+    addNewPost: post => dispatch(addNewPost(post)),
+    onDismiss: () => dispatch(closeModal())
   }
 }
 

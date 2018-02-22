@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, Link, withRouter } from 'react-router-dom'
 import { fetchCategories, fetchPosts } from './actions'
 import { getCategories, getPosts } from './utils/api'
+import PostModal from './PostModal'
 import CategoryList from './CategoryList'
 import NotFound from './NotFound'
 import PostList from './PostList'
@@ -12,10 +13,6 @@ class App extends Component {
   componentDidMount() {
     getCategories().then(this.props.fetchCategories)
     getPosts().then(this.props.fetchPosts)
-  }
-  getIdsOfPostsInCategory(categoryName) {
-    return this.props.posts.allIds
-      .filter(postKey => this.props.posts.byId[postKey].category === categoryName)
   }
   render() {
     const noCategories = this.props.categories.allNames.length === 0
@@ -30,7 +27,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/"
             render={() => (
-              <PostList postIds={this.props.posts.allIds} />
+              <PostList />
             )}
           />
           <Route exact path="/category/:name"
@@ -39,12 +36,7 @@ class App extends Component {
               if (!this.props.categories.allNames.includes(urlCategoryName)) {
                 return <NotFound text="Category Not Found" />
               }
-              return (
-                <PostList
-                  postIds={this.getIdsOfPostsInCategory(urlCategoryName)}
-                  category={urlCategoryName}
-                />
-              )
+              return <PostList category={urlCategoryName} />
             }}
           />
           <Route
@@ -53,15 +45,17 @@ class App extends Component {
             )}
           />
         </Switch>
+        <PostModal isOpen={this.props.modal.isOpen} />
       </div>
     )
   }
 }
 
-function mapStateToProps({ categories, posts }) {
+function mapStateToProps({ categories, posts, modal }) {
   return {
     categories,
-    posts
+    posts,
+    modal
   }
 }
 

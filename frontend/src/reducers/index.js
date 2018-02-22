@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux'
+import { sortPostIds } from '../utils/helpers'
 import {
   FETCH_CATEGORIES,
   FETCH_POSTS,
   ADD_NEW_POST,
+  CHANGE_CATEGORY,
   DOWNVOTE_POST,
   UPVOTE_POST,
   DELETE_POST,
-  UPDATE_SORT_ORDER
+  UPDATE_SORT_ORDER,
+  OPEN_MODAL,
+  CLOSE_MODAL
 } from '../actions'
 
 const defaultCategoryState = {
@@ -35,7 +39,9 @@ function categories(state = defaultCategoryState, action) {
 const defaultPostState = {
   byId: {},
   allIds: [],
-  sortOrder: 'none'
+  sortOrder: 'none',
+  category: undefined,
+  categoryIds: []
 }
 
 function posts(state = defaultPostState, action) {
@@ -51,7 +57,8 @@ function posts(state = defaultPostState, action) {
       return {
         ...state,
         byId,
-        allIds
+        allIds,
+        categoryIds: allIds
       }
     }
     case ADD_NEW_POST:
@@ -64,7 +71,17 @@ function posts(state = defaultPostState, action) {
         allIds: [
           ...state.allIds,
           action.post.id
-        ]
+        ],
+        categoryIds: action.post.category === state.category || !state.category
+          ? [...state.categoryIds, action.post.id]
+          : state.categoryIds
+      }
+    case CHANGE_CATEGORY:
+      return {
+        ...state,
+        category: action.category,
+        categoryIds: state.allIds
+          .filter(id => !action.category || state.byId[id].category === action.category)
       }
     case DOWNVOTE_POST:
       return {
@@ -91,12 +108,39 @@ function posts(state = defaultPostState, action) {
     case DELETE_POST:
       return {
         ...state,
-        allIds: [...state.allIds.filter(id => id !== action.id)]
+        allIds: [...state.allIds.filter(id => id !== action.id)],
+        categoryIds: [...state.categoryIds.filter(id => id !== action.id)]
       }
     case UPDATE_SORT_ORDER:
       return {
         ...state,
-        sortOrder: action.sortOrder
+        sortOrder: action.sortOrder,
+        categoryIds: action.sortOrder === 'none' ? state.categoryIds : sortPostIds(state.categoryIds, state.byId, action.sortOrder)
+      }
+    default:
+      return state
+  }
+}
+
+const defaultModalState = {
+  isOpen: false,
+  post: undefined
+}
+
+function modal(state = defaultModalState, action) {
+  switch (action.type) {
+    case OPEN_MODAL: {
+      return {
+        ...state,
+        isOpen: true,
+        titleText: action.modalProps.titleText,
+        category: action.modalProps.category
+      }
+    }
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        isOpen: false
       }
     default:
       return state
@@ -105,5 +149,6 @@ function posts(state = defaultPostState, action) {
 
 export default combineReducers({
   categories,
-  posts
+  posts,
+  modal
 })

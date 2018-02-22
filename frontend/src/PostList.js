@@ -1,74 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateSortOrder } from './actions'
-import { sortPostIds } from './utils/helpers'
+import { updateSortOrder, openModal, changeCategory } from './actions'
 import PostListSorter from './PostListSorter'
 import Post from './Post'
-import PostModal from './PostModal'
 import NotFound from './NotFound'
 
 class PostList extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      postIds: props.postIds,
-      addPostModalOpen: false
-    }
-
     this.handleSortChange = this.handleSortChange.bind(this)
-    this.afterPostSubmit = this.afterPostSubmit.bind(this)
-    this.afterPostDelete = this.afterPostDelete.bind(this)
+  }
+  componentDidMount() {
+    this.props.changeCategory(this.props.category)
   }
   componentWillReceiveProps(nextProps) {
-    if (this.props.category !== nextProps.category) {
-      if (this.props.sortOrder !== 'none') {
-        const sortedIds = sortPostIds(nextProps.postIds, this.props.postsById, this.props.sortOrder)
-        this.setState({ postIds: sortedIds })
-      }
-      else {
-        this.setState({ postIds: nextProps.postIds })
-      }
+    const newCategory = nextProps.category !== this.props.category
+    if (newCategory) {
+      this.props.changeCategory(nextProps.category)
+      this.props.updateSortOrder('none')
     }
   }
   handleSortChange({ target: { value: sortOrder } }) {
     this.props.updateSortOrder(sortOrder)
-    const sortedIds = sortPostIds(
-      this.state.postIds,
-      this.props.postsById,
-      sortOrder
-    )
-    this.setState({ postIds: sortedIds })
-  }
-  afterPostSubmit(newPost) {
-    const addNewPostToList = newPost.category === this.props.category ||
-      !this.props.category
-    if (addNewPostToList) {
-      this.setState({ postIds: [...this.state.postIds, newPost.id] })
-    }
-    this.setState({ addPostModalOpen: false })
-  }
-  afterPostDelete(deletedPostId) {
-    this.setState({ postIds: [...this.state.postIds.filter(id => id !== deletedPostId)] })
   }
   render() {
     const { postsById, sortOrder } = this.props
-    const mainContent = this.state.postIds.length > 0
+    const mainContent = this.props.categoryIds.length > 0
       ? (
         <div className="post-list">
           <PostListSorter
             onChange={this.handleSortChange}
             sortOrder={sortOrder}
           />
-          {this.state.postIds
-            .map(postId => (
-              <Post
-                key={postId}
-                post={postsById[postId]}
-                onDelete={this.afterPostDelete}
-              />
-            ))
-          }
+          {this.props.categoryIds.map(id => <Post key={id} post={postsById[id]} />)}
         </div>
       )
       : <NotFound text="No Posts Found" />
@@ -76,32 +41,42 @@ class PostList extends Component {
       <div className="post-list-container">
         <i
           className="post-add-icon icon ion-plus-circled"
-          onClick={() => this.setState({ addPostModalOpen: true })}
+          onClick={this.props.openModal}
         />
         {mainContent}
-        <PostModal
-          modalTitleText="Add New Post"
-          category={this.props.category}
-          isOpen={this.state.addPostModalOpen}
-          onDismiss={() => this.setState({ addPostModalOpen: false })}
-          afterSubmit={this.afterPostSubmit}
-        />
       </div>
     )
   }
 }
 
-function mapStateToProps({ posts: { byId: postsById, sortOrder }, categories }) {
+function mapStateToProps(state) {
+  const {
+    posts:
+    {
+      byId: postsById,
+      sortOrder,
+      categoryIds
+    },
+    categories,
+    modal
+  } = state
   return {
     postsById,
+    categoryIds,
     sortOrder,
-    categories
+    categories,
+    modal
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
-    updateSortOrder: sortOrder => dispatch(updateSortOrder(sortOrder))
+    updateSortOrder: sortOrder => dispatch(updateSortOrder(sortOrder)),
+    changeCategory: category => dispatch(changeCategory(category)),
+    openModal: () => dispatch(openModal({
+      titleText: 'Add New Post',
+      category: ownProps.category
+    }))
   }
 }
 

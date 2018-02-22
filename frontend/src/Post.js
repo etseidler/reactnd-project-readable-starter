@@ -11,10 +11,7 @@ class Post extends Component {
     upvotePostRequest(id).then(() => this.props.upvote(id))
   }
   delete(id) {
-    deletePostRequest(id).then(() => {
-      this.props.delete(id)
-      this.props.onDelete(id)
-    })
+    deletePostRequest(id).then(() => this.props.delete(id))
   }
   render() {
     const { post:
