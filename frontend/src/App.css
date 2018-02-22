@@ -36,10 +36,9 @@
   align-self: flex-end;
 }
 .post-item {
-  padding: 1.25em 0;
+  padding: 0.75em 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #DDD;
 }
@@ -61,6 +60,7 @@
 .post-vote-controls {
   display: flex;
   flex-direction: column;
+  flex: 1;
   margin-left: 0.25em;
   position: relative;
   top: 0.05em;
@@ -71,13 +71,25 @@
 .post-vote-controls:hover {
   cursor: pointer;
 }
+.post-main {
+  flex: 4;
+}
+.post-minor {
+  display: flex;
+  flex-direction: row;
+}
 .post-title {
   font-size: larger;
 }
+.post-author {
+  font-size: smaller;
+}
 .post-comment-count {
+  display: inline;
   font-size: smaller;
   color: #888;
   font-weight: bold;
+  margin-right: 0.5em;
 }
 .post-add-icon {
   position: fixed;
