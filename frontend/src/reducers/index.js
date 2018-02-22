@@ -5,6 +5,7 @@ import {
   ADD_NEW_POST,
   DOWNVOTE,
   UPVOTE,
+  DELETE_POST,
   UPDATE_SORT_ORDER
 } from '../actions'
 
@@ -86,6 +87,11 @@ function posts(state = defaultPostState, action) {
             voteScore: post.voteScore + 1
           }
         }
+      }
+    case DELETE_POST:
+      return {
+        ...state,
+        allIds: [...state.allIds.filter(id => id !== action.id)]
       }
     case UPDATE_SORT_ORDER:
       return {

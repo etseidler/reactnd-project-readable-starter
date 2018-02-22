@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { downvote, upvote } from './actions'
-import { downvotePost, upvotePost } from './utils/api'
+import { downvote, upvote, deletePost } from './actions'
+import { downvotePost, upvotePost, deletePostRequest } from './utils/api'
 
 class Post extends Component {
   downvote(id) {
@@ -9,6 +9,12 @@ class Post extends Component {
   }
   upvote(id) {
     upvotePost(id).then(() => this.props.upvote(id))
+  }
+  delete(id) {
+    deletePostRequest(id).then(() => {
+      this.props.delete(id)
+      this.props.onDelete(id)
+    })
   }
   render() {
     const { post:
@@ -30,6 +36,11 @@ class Post extends Component {
             <div className="post-author">by {author}</div>
           </div>
         </div>
+        <div className="post-modify-controls">
+          <div className="post-delete">
+            <i className="post-delete-icon icon ion-trash-b" onClick={() => this.delete(id)} />
+          </div>
+        </div>
       </div>
     )
   }
@@ -38,7 +49,8 @@ class Post extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     downvote: id => dispatch(downvote(id)),
-    upvote: id => dispatch(upvote(id))
+    upvote: id => dispatch(upvote(id)),
+    delete: id => dispatch(deletePost(id))
   }
 }
 

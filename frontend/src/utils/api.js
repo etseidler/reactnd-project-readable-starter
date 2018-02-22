@@ -24,6 +24,14 @@ export function upvotePost(id) {
   return votePost(id, 'upVote')
 }
 
+export function deletePostRequest(id) {
+  const request = {
+    headers,
+    method: 'DELETE'
+  }
+  return fetch(`${BASE_URL}/posts/${id}`, request)
+}
+
 export function createNewPost(newPostData) {
   headers['Content-Type'] = 'application/json'
   const request = {

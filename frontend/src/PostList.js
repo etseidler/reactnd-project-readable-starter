@@ -18,6 +18,7 @@ class PostList extends Component {
 
     this.handleSortChange = this.handleSortChange.bind(this)
     this.afterPostSubmit = this.afterPostSubmit.bind(this)
+    this.afterPostDelete = this.afterPostDelete.bind(this)
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.category !== nextProps.category) {
@@ -47,6 +48,9 @@ class PostList extends Component {
     }
     this.setState({ addPostModalOpen: false })
   }
+  afterPostDelete(deletedPostId) {
+    this.setState({ postIds: [...this.state.postIds.filter(id => id !== deletedPostId)] })
+  }
   render() {
     const { postsById, sortOrder } = this.props
     const mainContent = this.state.postIds.length > 0
@@ -61,6 +65,7 @@ class PostList extends Component {
               <Post
                 key={postId}
                 post={postsById[postId]}
+                onDelete={this.afterPostDelete}
               />
             ))
           }
