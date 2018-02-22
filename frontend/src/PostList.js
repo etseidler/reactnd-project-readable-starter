@@ -56,7 +56,14 @@ class PostList extends Component {
             onChange={this.handleSortChange}
             sortOrder={sortOrder}
           />
-          {this.state.postIds.map(postId => <Post key={postId} post={postsById[postId]} />)}
+          {this.state.postIds
+            .map(postId => (
+              <Post
+                key={postId}
+                post={postsById[postId]}
+              />
+            ))
+          }
         </div>
       )
       : <NotFound text="No Posts Found" />
