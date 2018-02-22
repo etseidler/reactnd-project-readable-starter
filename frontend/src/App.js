@@ -14,7 +14,7 @@ class App extends Component {
     getPosts().then(this.props.fetchPosts)
   }
   getIdsOfPostsInCategory(categoryName) {
-    return Object.keys(this.props.posts.byId)
+    return this.props.posts.allIds
       .filter(postKey => this.props.posts.byId[postKey].category === categoryName)
   }
   render() {
