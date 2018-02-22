@@ -99,6 +99,9 @@
   cursor: pointer;
   color: #444;
 }
+.post-add-icon:active {
+  color: #000;
+}
 .post-modify-controls {
   margin-right: 0.25em;
 }
@@ -145,6 +148,9 @@
   font-size: large;
   color: #444;
   cursor: pointer;
+}
+.modal-dismiss-icon:active {
+  color: #000;
 }
 .new-post-form {
   height: 100%;
