@@ -24,6 +24,8 @@ class PostModal extends Component {
     }
 
     this.handleFieldChange = this.handleFieldChange.bind(this)
+    this.handleDismiss = this.handleDismiss.bind(this)
+    this.resetFormState = this.resetFormState.bind(this)
     this.validateFormFields = this.validateFormFields.bind(this)
     this.submitNewPost = this.submitNewPost.bind(this)
   }
@@ -48,6 +50,17 @@ class PostModal extends Component {
       this.validateFormFields
     );
   }
+  handleDismiss() {
+    this.resetFormState()
+    this.props.onDismiss()
+  }
+  resetFormState() {
+    this.setState({
+      title: '',
+      author: '',
+      body: '',
+    })
+  }
   submitNewPost() {
     const { title, author, category, body } = this.state
     const newPostData = {
@@ -61,11 +74,7 @@ class PostModal extends Component {
     createNewPost(newPostData)
       .then((post) => {
         this.props.addNewPost(post)
-        this.setState({
-          title: '',
-          author: '',
-          body: ''
-        })
+        this.resetFormState()
         this.props.afterSubmit(post)
       })
   }
@@ -142,7 +151,7 @@ class PostModal extends Component {
         </div>
         <i
           className="modal-dismiss-icon icon ion-close"
-          onClick={this.props.onDismiss}
+          onClick={this.handleDismiss}
         />
       </Modal>
     )
