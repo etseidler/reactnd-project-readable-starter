@@ -59,6 +59,7 @@ class PostModal extends Component {
       title: '',
       author: '',
       body: '',
+      submitDisabled: true
     })
   }
   submitNewPost() {
