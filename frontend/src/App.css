@@ -105,6 +105,14 @@
 .post-modify-controls {
   margin-right: 0.25em;
 }
+.post-edit-icon {
+  margin-right: 0.5em;
+  color: #444;
+  cursor: pointer;
+}
+.post-edit-icon:active {
+  color: #000;
+}
 .post-delete-icon {
   font-size: large;
   color: #444;

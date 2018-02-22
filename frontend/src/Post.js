@@ -37,9 +37,8 @@ class Post extends Component {
           </div>
         </div>
         <div className="post-modify-controls">
-          <div className="post-delete">
-            <i className="post-delete-icon icon ion-trash-b" onClick={() => this.delete(id)} />
-          </div>
+          <i className="post-edit-icon icon ion-edit" onClick={() => {}} />
+          <i className="post-delete-icon icon ion-trash-b" onClick={() => this.delete(id)} />
         </div>
       </div>
     )
