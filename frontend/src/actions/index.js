@@ -2,7 +2,7 @@ export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
 export const FETCH_POSTS = 'FETCH_POSTS'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
-export const UPVOTE = 'UPVOTE'
+export const UPVOTE_POST = 'UPVOTE_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_SORT_ORDER = 'UPDATE_SORT_ORDER'
 
@@ -34,9 +34,9 @@ export function downvotePost(id) {
   }
 }
 
-export function upvote(id) {
+export function upvotePost(id) {
   return {
-    type: UPVOTE,
+    type: UPVOTE_POST,
     id
   }
 }

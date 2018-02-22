@@ -20,7 +20,7 @@ export function downvotePostRequest(id) {
   return votePost(id, 'downVote')
 }
 
-export function upvotePost(id) {
+export function upvotePostRequest(id) {
   return votePost(id, 'upVote')
 }
 

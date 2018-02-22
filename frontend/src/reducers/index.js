@@ -4,7 +4,7 @@ import {
   FETCH_POSTS,
   ADD_NEW_POST,
   DOWNVOTE_POST,
-  UPVOTE,
+  UPVOTE_POST,
   DELETE_POST,
   UPDATE_SORT_ORDER
 } from '../actions'
@@ -77,7 +77,7 @@ function posts(state = defaultPostState, action) {
           }
         }
       }
-    case UPVOTE:
+    case UPVOTE_POST:
       return {
         ...state,
         byId: {
