@@ -15,10 +15,16 @@ export function sortPostIds(postIds, postsById, sortOrder) {
 }
 
 function sortDescending(first, second) {
+  if (typeof first === 'string') {
+    return first.toLowerCase() > second.toLowerCase() ? -1 : 1
+  }
   return first > second ? -1 : 1
 }
 
 function sortAscending(first, second) {
+  if (typeof first === 'string') {
+    return first.toLowerCase() < second.toLowerCase() ? -1 : 1
+  }
   return first < second ? -1 : 1
 }
 
