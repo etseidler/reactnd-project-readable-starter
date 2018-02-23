@@ -112,6 +112,13 @@ body.ReactModal__Body--open {
 .post-add-icon:active {
   color: #000;
 }
+.post-add-icon:before {
+  background-color: #FFF;
+  border-radius: 25px;
+  width: 30px;
+  height: 32px;
+  padding-left: 3px;
+}
 .post-modify-controls {
   margin-right: 0.25em;
   font-size: larger;
