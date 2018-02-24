@@ -94,6 +94,7 @@ class PostModal extends Component {
                 Title
                 <br />
                 <input
+                  autoFocus="true"
                   name="title"
                   value={this.state.title}
                   onChange={this.handleFieldChange}
@@ -151,6 +152,7 @@ class PostModal extends Component {
           </div>
         </div>
         <i
+          tabIndex="0"
           className="modal-dismiss-icon icon ion-close"
           onClick={this.handleDismiss}
         />
