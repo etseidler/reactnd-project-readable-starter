@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { downvotePost, upvotePost, deletePost } from './actions'
+import { downvotePost, upvotePost, deletePost, openModal } from './actions'
 import { downvotePostRequest, upvotePostRequest, deletePostRequest } from './utils/api'
 
 class Post extends Component {
@@ -34,7 +34,7 @@ class Post extends Component {
           </div>
         </div>
         <div className="post-modify-controls">
-          <i className="post-edit-icon icon ion-edit" onClick={() => {}} />
+          <i className="post-edit-icon icon ion-edit" onClick={() => this.props.openModal()} />
           <i className="post-delete-icon icon ion-trash-b" onClick={() => this.delete(id)} />
         </div>
       </div>
@@ -42,11 +42,21 @@ class Post extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
+  const { title, author, category, body } = ownProps.post
   return {
     downvote: id => dispatch(downvotePost(id)),
     upvote: id => dispatch(upvotePost(id)),
-    delete: id => dispatch(deletePost(id))
+    delete: id => dispatch(deletePost(id)),
+    openModal: () => dispatch(openModal(
+      'Edit Post',
+      {
+        title,
+        author,
+        category,
+        body
+      }
+    ))
   }
 }
 

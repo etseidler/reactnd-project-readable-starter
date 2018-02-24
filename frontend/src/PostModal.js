@@ -33,6 +33,11 @@ class PostModal extends Component {
     if (nextProps.category !== this.state.category) {
       this.setState({ category: nextProps.category || this.state.firstCategoryName })
     }
+    this.setState({
+      title: nextProps.title,
+      author: nextProps.author,
+      body: nextProps.body
+    })
   }
   validateFormFields() {
     const fieldsToValidate = ['title', 'author', 'body']
