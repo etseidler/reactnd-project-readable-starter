@@ -32,7 +32,7 @@ export function deletePostRequest(id) {
   return fetch(`${BASE_URL}/posts/${id}`, request)
 }
 
-export function createNewPost(newPostData) {
+export function createNewPostRequest(newPostData) {
   headers['Content-Type'] = 'application/json'
   const request = {
     headers,
@@ -40,6 +40,18 @@ export function createNewPost(newPostData) {
     body: JSON.stringify(newPostData)
   }
   return fetch(`${BASE_URL}/posts`, request)
+    .then(res => res.json())
+    .then(data => data)
+}
+
+export function editPostRequest(id, postData) {
+  headers['Content-Type'] = 'application/json'
+  const request = {
+    headers,
+    method: 'PUT',
+    body: JSON.stringify(postData)
+  }
+  return fetch(`${BASE_URL}/posts/${id}`, request)
     .then(res => res.json())
     .then(data => data)
 }

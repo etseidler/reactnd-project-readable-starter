@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import uuid from 'uuid/v4'
-import { addNewPost, closeModal } from './actions'
-import { createNewPost } from './utils/api'
+import { addNewPost, closeModal, updatePost } from './actions'
+import { createNewPostRequest, editPostRequest } from './utils/api'
 import { capitalize } from './utils/helpers'
 
 class PostModal extends Component {
@@ -24,10 +24,12 @@ class PostModal extends Component {
     }
 
     this.handleFieldChange = this.handleFieldChange.bind(this)
-    this.handleDismiss = this.handleDismiss.bind(this)
+    this.dismiss = this.dismiss.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.resetFormState = this.resetFormState.bind(this)
     this.validateFormFields = this.validateFormFields.bind(this)
-    this.submitNewPost = this.submitNewPost.bind(this)
+    this.createNewPost = this.createNewPost.bind(this)
+    this.editPost = this.editPost.bind(this)
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.category !== this.state.category) {
@@ -55,9 +57,9 @@ class PostModal extends Component {
       this.validateFormFields
     );
   }
-  handleDismiss() {
+  dismiss() {
     this.resetFormState()
-    this.props.onDismiss()
+    this.props.closeModal()
   }
   resetFormState() {
     this.setState({
@@ -67,7 +69,7 @@ class PostModal extends Component {
       submitDisabled: true
     })
   }
-  submitNewPost() {
+  createNewPost() {
     const { title, author, category, body } = this.state
     const newPostData = {
       timestamp: Date.now(),
@@ -77,12 +79,24 @@ class PostModal extends Component {
       category,
       body
     }
-    createNewPost(newPostData)
-      .then((post) => {
-        this.props.addNewPost(post)
-        this.resetFormState()
-        this.props.onDismiss()
-      })
+    createNewPostRequest(newPostData).then(this.props.addNewPost)
+  }
+  editPost(id) {
+    const { title, body } = this.state
+    const postData = {
+      title,
+      body
+    }
+    editPostRequest(id, postData).then(this.props.updatePost)
+  }
+  handleSubmit() {
+    if (this.props.id) {
+      this.editPost(this.props.id)
+    }
+    else {
+      this.createNewPost()
+    }
+    this.dismiss()
   }
   render() {
     return (
@@ -149,7 +163,7 @@ class PostModal extends Component {
           <div className="modal-footer">
             <button
               className="new-post-submit"
-              onClick={this.submitNewPost}
+              onClick={this.handleSubmit}
               disabled={this.state.submitDisabled}
             >
               Submit
@@ -159,7 +173,7 @@ class PostModal extends Component {
         <i
           tabIndex="0"
           className="modal-dismiss-icon icon ion-close"
-          onClick={this.handleDismiss}
+          onClick={this.dismiss}
         />
       </Modal>
     )
@@ -176,21 +190,23 @@ const modalStyles = {
 }
 
 function mapStateToProps({ categories, modal }) {
-  const { headerText, post: { title, author, body, category } } = modal
+  const { headerText, post: { title, author, body, category, id } } = modal
   return {
     categories,
     headerText,
     category,
     title,
     author,
-    body
+    body,
+    id
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     addNewPost: post => dispatch(addNewPost(post)),
-    onDismiss: () => dispatch(closeModal())
+    updatePost: post => dispatch(updatePost(post)),
+    closeModal: () => dispatch(closeModal())
   }
 }
 

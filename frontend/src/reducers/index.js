@@ -4,6 +4,7 @@ import {
   FETCH_CATEGORIES,
   FETCH_POSTS,
   ADD_NEW_POST,
+  UPDATE_POST,
   CHANGE_CATEGORY,
   DOWNVOTE_POST,
   UPVOTE_POST,
@@ -75,6 +76,14 @@ function posts(state = defaultPostState, action) {
         categoryIds: action.post.category === state.category || !state.category
           ? [...state.categoryIds, action.post.id]
           : state.categoryIds
+      }
+    case UPDATE_POST:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.post.id]: action.post
+        }
       }
     case CHANGE_CATEGORY:
       return {

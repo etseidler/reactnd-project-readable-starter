@@ -4,6 +4,7 @@ export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const UPVOTE_POST = 'UPVOTE_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const UPDATE_POST = 'UPDATE_POST'
 export const OPEN_MODAL = 'OPEN_MODAL'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY'
@@ -26,6 +27,13 @@ export function fetchPosts(posts) {
 export function addNewPost(post) {
   return {
     type: ADD_NEW_POST,
+    post
+  }
+}
+
+export function updatePost(post) {
+  return {
+    type: UPDATE_POST,
     post
   }
 }

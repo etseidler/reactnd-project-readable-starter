@@ -43,7 +43,7 @@ class Post extends Component {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  const { title, author, category, body } = ownProps.post
+  const { title, author, category, body, id: postId } = ownProps.post
   return {
     downvote: id => dispatch(downvotePost(id)),
     upvote: id => dispatch(upvotePost(id)),
@@ -54,7 +54,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         title,
         author,
         category,
-        body
+        body,
+        id: postId
       }
     ))
   }
