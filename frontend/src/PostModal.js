@@ -15,11 +15,11 @@ class PostModal extends Component {
 
     this.state = {
       isOpen: props.isOpen,
-      title: '',
-      author: '',
+      title: props.title,
+      author: props.author,
       category: props.category || firstCategoryName,
       firstCategoryName,
-      body: '',
+      body: props.body,
       submitDisabled: true
     }
 
@@ -38,7 +38,7 @@ class PostModal extends Component {
     const fieldsToValidate = ['title', 'author', 'body']
     let submitDisabled = false
     fieldsToValidate.forEach((field) => {
-      if (this.state[field].length === 0) {
+      if (!this.state[field] || this.state[field].length === 0) {
         submitDisabled = true
       }
     })
@@ -87,7 +87,7 @@ class PostModal extends Component {
         style={modalStyles}
       >
         <div className="modal-container">
-          <div className="modal-header">{this.props.titleText}</div>
+          <div className="modal-header">{this.props.headerText}</div>
           <div className="modal-body">
             <div className="new-post-form">
               <label htmlFor="new-post-title">
@@ -96,7 +96,7 @@ class PostModal extends Component {
                 <input
                   autoFocus="true"
                   name="title"
-                  value={this.state.title}
+                  defaultValue={this.state.title}
                   onChange={this.handleFieldChange}
                   id="new-post-title"
                 />
@@ -107,7 +107,7 @@ class PostModal extends Component {
                 <input
                   name="author"
                   id="new-post-author"
-                  value={this.state.author}
+                  defaultValue={this.state.author}
                   onChange={this.handleFieldChange}
                 />
               </label>
@@ -117,7 +117,7 @@ class PostModal extends Component {
                 <select
                   name="category"
                   id="new-post-category"
-                  value={this.state.category}
+                  defaultValue={this.state.category}
                   onChange={this.handleFieldChange}
                 >
                   {this.props.categories.allNames
@@ -135,7 +135,7 @@ class PostModal extends Component {
                 <textarea
                   name="body"
                   id="new-post-body"
-                  value={this.state.body}
+                  defaultValue={this.state.body}
                   onChange={this.handleFieldChange}
                 />
               </label>
@@ -170,11 +170,15 @@ const modalStyles = {
   }
 }
 
-function mapStateToProps({ categories, modal: { titleText, category } }) {
+function mapStateToProps({ categories, modal }) {
+  const { headerText, post: { title, author, body, category } } = modal
   return {
     categories,
-    titleText,
-    category
+    headerText,
+    category,
+    title,
+    author,
+    body
   }
 }
 

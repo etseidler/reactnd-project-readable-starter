@@ -58,10 +58,10 @@ export function deletePost(id) {
   }
 }
 
-export function openModal(modalProps, post = {}) {
+export function openModal(headerText, post = {}) {
   return {
     type: OPEN_MODAL,
-    modalProps,
+    headerText,
     post
   }
 }

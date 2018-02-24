@@ -123,24 +123,24 @@ function posts(state = defaultPostState, action) {
 }
 
 const defaultModalState = {
+  headerText: '',
   isOpen: false,
-  post: undefined
+  post: {}
 }
 
 function modal(state = defaultModalState, action) {
   switch (action.type) {
     case OPEN_MODAL: {
       return {
-        ...state,
+        headerText: action.headerText,
         isOpen: true,
-        titleText: action.modalProps.titleText,
-        category: action.modalProps.category
+        post: { ...action.post }
       }
     }
     case CLOSE_MODAL:
       return {
-        ...state,
-        isOpen: false
+        isOpen: false,
+        post: {}
       }
     default:
       return state

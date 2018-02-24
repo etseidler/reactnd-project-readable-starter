@@ -73,10 +73,10 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     updateSortOrder: sortOrder => dispatch(updateSortOrder(sortOrder)),
     changeCategory: category => dispatch(changeCategory(category)),
-    openModal: () => dispatch(openModal({
-      titleText: 'Add New Post',
-      category: ownProps.category
-    }))
+    openModal: () => dispatch(openModal(
+      'Add New Post',
+      { category: ownProps.category }
+    ))
   }
 }
 
