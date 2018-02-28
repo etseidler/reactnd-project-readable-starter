@@ -1,4 +1,5 @@
-/* global document */
+/* global document,window */
+/* eslint no-underscore-dangle: "off" */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
@@ -9,7 +10,10 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import reducer from './reducers'
 
-const store = createStore(reducer)
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
   <Provider store={store}>
