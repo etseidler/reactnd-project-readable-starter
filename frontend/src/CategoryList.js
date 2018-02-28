@@ -16,7 +16,7 @@ function CategoryList(props) {
                 key={name}
                 className={`category-item ${categoryIsSelected ? ' category-item-selected' : ''}`}
               >
-                <Link to={`/${path}`} >{capitalize(name)}</Link>
+                <Link to={`/${path}`}>{capitalize(name)}</Link>
               </div>
             )
           })
