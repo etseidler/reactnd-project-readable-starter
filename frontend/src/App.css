@@ -178,34 +178,34 @@ body.ReactModal__Body--open {
 .modal-dismiss-icon:active {
   color: #000;
 }
-.new-post-form {
+.post-form {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-content: space-around;
 }
-.new-post-form label {
+.post-form label {
   text-align: left;
   margin: 1em 0 0 10%;
 }
-.new-post-form input,
-.new-post-form textarea {
+.post-form input,
+.post-form textarea {
   border: 1px solid #000;
   font-size: large;
 }
-.new-post-form input {
+.post-form input {
   height: 20px;
   width: 70%;
 }
-.new-post-form input:disabled {
+.post-form input:disabled {
   border: none;
   pointer-events: none;
 }
-.new-post-form textarea {
+.post-form textarea {
   height: 100px;
   width: 70%;
 }
-.new-post-submit {
+.post-submit {
   width: 50%;
   background-color: #BBB;
   border-radius: 5px;
@@ -214,7 +214,7 @@ body.ReactModal__Body--open {
   cursor: pointer;
   font-size: inherit;
 }
-.new-post-submit:disabled {
+.post-submit:disabled {
   border: 1px solid rgba(0,0,0,.25)
 }
 

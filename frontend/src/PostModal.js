@@ -108,34 +108,34 @@ class PostModal extends Component {
         <div className="modal-container">
           <div className="modal-header">{this.props.headerText}</div>
           <div className="modal-body">
-            <div className="new-post-form">
-              <label htmlFor="new-post-title">
+            <div className="post-form">
+              <label htmlFor="post-title">
                 Title
                 <br />
                 <input
                   name="title"
                   defaultValue={this.state.title}
                   onChange={this.handleFieldChange}
-                  id="new-post-title"
+                  id="post-title"
                 />
               </label>
-              <label htmlFor="new-post-author">
+              <label htmlFor="post-author">
                 Author
                 <br />
                 <input
                   name="author"
-                  id="new-post-author"
+                  id="post-author"
                   defaultValue={this.state.author}
                   onChange={this.handleFieldChange}
                   disabled={this.props.id}
                 />
               </label>
-              <label htmlFor="new-post-body">
+              <label htmlFor="post-body">
                 Category
                 <br />
                 <select
                   name="category"
-                  id="new-post-category"
+                  id="post-category"
                   defaultValue={this.state.category}
                   onChange={this.handleFieldChange}
                   disabled={this.props.id}
@@ -149,12 +149,12 @@ class PostModal extends Component {
                   }
                 </select>
               </label>
-              <label htmlFor="new-post-body">
+              <label htmlFor="post-body">
                 Post
                 <br />
                 <textarea
                   name="body"
-                  id="new-post-body"
+                  id="post-body"
                   defaultValue={this.state.body}
                   onChange={this.handleFieldChange}
                 />
@@ -163,7 +163,7 @@ class PostModal extends Component {
           </div>
           <div className="modal-footer">
             <button
-              className="new-post-submit"
+              className="post-submit"
               onClick={this.handleSubmit}
               disabled={this.state.submitDisabled}
             >
