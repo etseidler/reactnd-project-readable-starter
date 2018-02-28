@@ -35,6 +35,11 @@ body.ReactModal__Body--open {
   text-decoration: none;
 }
 
+.category-item.category-item-selected a {
+  color: #EEE;
+  text-shadow: 1px 1px #000;
+}
+
 /* posts */
 
 .post-list {

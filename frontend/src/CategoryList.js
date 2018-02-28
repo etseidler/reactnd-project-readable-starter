@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { capitalize } from './utils/helpers'
 
@@ -9,7 +10,15 @@ function CategoryList(props) {
         ? props.categories.allNames
           .map((catName) => {
             const { name, path } = props.categories.byName[catName]
-            return <div key={name} className="category-item"><Link to={`/category/${path}`} >{capitalize(name)}</Link></div>
+            const categoryIsSelected = props.selectedCategory === name
+            return (
+              <div
+                key={name}
+                className={`category-item ${categoryIsSelected ? ' category-item-selected' : ''}`}
+              >
+                <Link to={`/category/${path}`} >{capitalize(name)}</Link>
+              </div>
+            )
           })
         : null
       }
@@ -17,4 +26,13 @@ function CategoryList(props) {
   )
 }
 
-export default CategoryList
+function mapStateToProps({ posts: { category: selectedCategory } }) {
+  return {
+    selectedCategory
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(CategoryList)
