@@ -16,7 +16,7 @@ class Post extends Component {
   }
   render() {
     const { post:
-      { id, voteScore, title, commentCount, author }
+      { id, voteScore, title, commentCount, author, category }
     } = this.props
     return (
       <div className="post-item">
@@ -28,7 +28,7 @@ class Post extends Component {
           </div>
         </div>
         <div className="post-main">
-          <div className="post-title"><Link to={`/post/${id}`}>{title}</Link></div>
+          <div className="post-title"><Link to={`/${category}/${id}`}>{title}</Link></div>
           <div className="post-minor">
             <div className="post-comment-count">{commentCount} comment{commentCount !== 1 ? 's' : ''}</div>
             <div className="post-author">by {author}</div>

@@ -31,18 +31,18 @@ class App extends Component {
               <PostList />
             )}
           />
-          <Route exact path="/category/:name"
+          <Route exact path="/:category"
             render={(props) => {
-              const { match: { params: { name: urlCategoryName } } } = props
+              const { match: { params: { category: urlCategoryName } } } = props
               if (!this.props.categories.allNames.includes(urlCategoryName)) {
                 return <NotFound text="Category Not Found" />
               }
               return <PostList category={urlCategoryName} />
             }}
           />
-          <Route exact path="/post/:id"
+          <Route exact path="/:category/:postId"
             render={(props) => {
-              const { match: { params: { id: urlPostId } } } = props
+              const { match: { params: { postId: urlPostId } } } = props
               const postNotAvailable = !this.props.posts.allIds.includes(urlPostId) ||
                 this.props.posts.byId[urlPostId].deleted
               if (postNotAvailable) {
