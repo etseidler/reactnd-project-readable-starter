@@ -3,6 +3,7 @@ import { sortPostIds } from '../utils/helpers'
 import {
   LOAD_CATEGORIES,
   LOAD_POSTS,
+  LOAD_POST_COMMENTS,
   ADD_NEW_POST,
   UPDATE_POST,
   CHANGE_CATEGORY,
@@ -156,8 +157,29 @@ function modal(state = defaultModalState, action) {
   }
 }
 
+const defaultCommentsState = {
+  allIds: [],
+  byId: {}
+}
+
+function comments(state = defaultCommentsState, action) {
+  switch (action.type) {
+    case LOAD_POST_COMMENTS:
+      return {
+        allIds: action.comments.map(c => c.id),
+        byId: action.comments.reduce((acc, cur) => {
+          acc[cur.id] = cur
+          return acc
+        }, {})
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   categories,
   posts,
-  modal
+  modal,
+  comments
 })

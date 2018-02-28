@@ -16,6 +16,12 @@ export function getPostsRequest() {
     .then(data => data)
 }
 
+export function getPostCommentsRequest(id) {
+  return fetch(`${BASE_URL}/posts/${id}/comments`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+}
+
 export function downvotePostRequest(id) {
   return votePost(id, 'downVote')
 }

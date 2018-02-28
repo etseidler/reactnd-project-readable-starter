@@ -1,5 +1,6 @@
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
 export const LOAD_POSTS = 'LOAD_POSTS'
+export const LOAD_POST_COMMENTS = 'LOAD_POST_COMMENTS'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const UPVOTE_POST = 'UPVOTE_POST'
@@ -21,6 +22,13 @@ export function loadPosts(posts) {
   return {
     type: LOAD_POSTS,
     posts
+  }
+}
+
+export function loadPostComments(comments) {
+  return {
+    type: LOAD_POST_COMMENTS,
+    comments
   }
 }
 

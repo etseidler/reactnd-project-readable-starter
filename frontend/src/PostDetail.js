@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { changeCategory } from './actions'
+import { changeCategory, loadPostComments } from './actions'
+import { getPostCommentsRequest } from './utils/api'
 
 class PostDetail extends Component {
   componentDidMount() {
     this.props.changeCategory(this.props.post.category)
+    getPostCommentsRequest(this.props.post.id).then(this.props.loadPostComments)
   }
   render() {
     const { title, body, author, commentCount, voteScore } = this.props.post
@@ -22,7 +24,8 @@ class PostDetail extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeCategory: category => dispatch(changeCategory(category))
+    changeCategory: category => dispatch(changeCategory(category)),
+    loadPostComments: comments => dispatch(loadPostComments(comments))
   }
 }
 
