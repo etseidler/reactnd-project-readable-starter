@@ -127,6 +127,7 @@ class PostModal extends Component {
                   id="new-post-author"
                   defaultValue={this.state.author}
                   onChange={this.handleFieldChange}
+                  disabled={this.props.id}
                 />
               </label>
               <label htmlFor="new-post-body">
@@ -137,6 +138,7 @@ class PostModal extends Component {
                   id="new-post-category"
                   defaultValue={this.state.category}
                   onChange={this.handleFieldChange}
+                  disabled={this.props.id}
                 >
                   {this.props.categories.allNames
                     .map(categoryName => (

@@ -197,6 +197,10 @@ body.ReactModal__Body--open {
   height: 20px;
   width: 70%;
 }
+.new-post-form input:disabled {
+  border: none;
+  pointer-events: none;
+}
 .new-post-form textarea {
   height: 100px;
   width: 70%;
