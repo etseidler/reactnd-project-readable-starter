@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, Link, withRouter } from 'react-router-dom'
-import { fetchCategories, fetchPosts } from './actions'
-import { getCategories, getPosts } from './utils/api'
+import { loadCategories, loadPosts } from './actions'
+import { getCategoriesRequest, getPostsRequest } from './utils/api'
 import PostModal from './PostModal'
 import CategoryList from './CategoryList'
 import NotFound from './NotFound'
@@ -12,8 +12,8 @@ import './App.css'
 
 class App extends Component {
   componentDidMount() {
-    getCategories().then(this.props.fetchCategories)
-    getPosts().then(this.props.fetchPosts)
+    getCategoriesRequest().then(this.props.loadCategories)
+    getPostsRequest().then(this.props.loadPosts)
   }
   render() {
     const noCategories = this.props.categories.allNames.length === 0
@@ -73,8 +73,8 @@ function mapStateToProps({ categories, posts, modal }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCategories: data => dispatch(fetchCategories(data)),
-    fetchPosts: data => dispatch(fetchPosts(data))
+    loadCategories: data => dispatch(loadCategories(data)),
+    loadPosts: data => dispatch(loadPosts(data))
   }
 }
 

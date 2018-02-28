@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import { sortPostIds } from '../utils/helpers'
 import {
-  FETCH_CATEGORIES,
-  FETCH_POSTS,
+  LOAD_CATEGORIES,
+  LOAD_POSTS,
   ADD_NEW_POST,
   UPDATE_POST,
   CHANGE_CATEGORY,
@@ -21,7 +21,7 @@ const defaultCategoryState = {
 
 function categories(state = defaultCategoryState, action) {
   switch (action.type) {
-    case FETCH_CATEGORIES: {
+    case LOAD_CATEGORIES: {
       const allNames = action.categories.map(category => category.name)
       const byName = action.categories.reduce((acc, cur) => {
         acc[cur.name] = cur
@@ -49,7 +49,7 @@ function posts(state = defaultPostState, action) {
   const { id: postId } = action
   const post = state && state.byId && state.byId[postId]
   switch (action.type) {
-    case FETCH_POSTS: {
+    case LOAD_POSTS: {
       const allIds = action.posts.map(p => p.id)
       const byId = action.posts.reduce((acc, cur) => {
         acc[cur.id] = cur

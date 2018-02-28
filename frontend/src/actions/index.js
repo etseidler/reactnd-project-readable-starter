@@ -1,5 +1,5 @@
-export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
-export const FETCH_POSTS = 'FETCH_POSTS'
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
+export const LOAD_POSTS = 'LOAD_POSTS'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const UPVOTE_POST = 'UPVOTE_POST'
@@ -10,16 +10,16 @@ export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY'
 export const UPDATE_SORT_ORDER = 'UPDATE_SORT_ORDER'
 
-export function fetchCategories(categories) {
+export function loadCategories(categories) {
   return {
-    type: FETCH_CATEGORIES,
+    type: LOAD_CATEGORIES,
     categories
   }
 }
 
-export function fetchPosts(posts) {
+export function loadPosts(posts) {
   return {
-    type: FETCH_POSTS,
+    type: LOAD_POSTS,
     posts
   }
 }
