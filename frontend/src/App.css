@@ -91,6 +91,9 @@ body.ReactModal__Body--open {
 .post-title {
   font-size: larger;
 }
+.post-title a {
+  text-decoration: none;
+}
 .post-author {
   font-size: smaller;
 }

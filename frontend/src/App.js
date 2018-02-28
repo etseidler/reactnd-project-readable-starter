@@ -7,6 +7,7 @@ import PostModal from './PostModal'
 import CategoryList from './CategoryList'
 import NotFound from './NotFound'
 import PostList from './PostList'
+import PostDetail from './PostDetail'
 import './App.css'
 
 class App extends Component {
@@ -37,6 +38,17 @@ class App extends Component {
                 return <NotFound text="Category Not Found" />
               }
               return <PostList category={urlCategoryName} />
+            }}
+          />
+          <Route exact path="/post/:id"
+            render={(props) => {
+              const { match: { params: { id: urlPostId } } } = props
+              const postNotAvailable = !this.props.posts.allIds.includes(urlPostId) ||
+                this.props.posts.byId[urlPostId].deleted
+              if (postNotAvailable) {
+                return <NotFound text="Post Not Found" />
+              }
+              return <PostDetail post={this.props.posts.byId[urlPostId]} />
             }}
           />
           <Route

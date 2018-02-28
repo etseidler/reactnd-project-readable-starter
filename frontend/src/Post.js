@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { downvotePost, upvotePost, deletePost, openModal } from './actions'
 import { downvotePostRequest, upvotePostRequest, deletePostRequest } from './utils/api'
@@ -27,7 +28,7 @@ class Post extends Component {
           </div>
         </div>
         <div className="post-main">
-          <div className="post-title">{title}</div>
+          <div className="post-title"><Link to={`/post/${id}`}>{title}</Link></div>
           <div className="post-minor">
             <div className="post-comment-count">{commentCount} comment{commentCount !== 1 ? 's' : ''}</div>
             <div className="post-author">by {author}</div>
