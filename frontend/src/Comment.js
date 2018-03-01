@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { downvoteCommentRequest, upvoteCommentRequest } from './utils/api'
-import { downvoteComment, upvoteComment } from './actions'
+import { downvoteCommentRequest, upvoteCommentRequest, deleteCommentRequest } from './utils/api'
+import { downvoteComment, upvoteComment, deleteComment } from './actions'
 import VoteControl from './VoteControl'
+import ModifyControl from './ModifyControl'
 
 class Comment extends Component {
   constructor(props) {
@@ -17,6 +18,9 @@ class Comment extends Component {
   upvote(id) {
     upvoteCommentRequest(id).then(() => this.props.upvote(id))
   }
+  delete(id) {
+    deleteCommentRequest(id).then(() => this.props.delete(id))
+  }
   render() {
     const {
       author,
@@ -30,6 +34,7 @@ class Comment extends Component {
         <div className="comment-author">{author}</div>
         <div className="comment-vote-score">{voteScore}</div>
         <VoteControl upvote={this.upvote} downvote={this.downvote} id={id} />
+        <ModifyControl onEdit={() => {}} onDelete={() => this.delete(id)} />
       </div>
     )
   }
@@ -38,7 +43,8 @@ class Comment extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     downvote: id => dispatch(downvoteComment(id)),
-    upvote: id => dispatch(upvoteComment(id))
+    upvote: id => dispatch(upvoteComment(id)),
+    delete: id => dispatch(deleteComment(id))
   }
 }
 

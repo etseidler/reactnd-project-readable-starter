@@ -46,6 +46,14 @@ export function deletePostRequest(id) {
   return fetch(`${BASE_URL}/posts/${id}`, request)
 }
 
+export function deleteCommentRequest(id) {
+  const request = {
+    headers,
+    method: 'DELETE'
+  }
+  return fetch(`${BASE_URL}/comments/${id}`, request)
+}
+
 export function createNewPostRequest(newPostData) {
   headers['Content-Type'] = 'application/json'
   const request = {

@@ -1,7 +1,8 @@
 import {
   LOAD_POST_COMMENTS,
   DOWNVOTE_COMMENT,
-  UPVOTE_COMMENT
+  UPVOTE_COMMENT,
+  DELETE_COMMENT
 } from '../actions'
 
 const defaultCommentsState = {
@@ -42,6 +43,11 @@ function comments(state = defaultCommentsState, action) {
             voteScore: comment.voteScore + 1
           }
         }
+      }
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        allIds: [...state.allIds.filter(id => id !== action.id)]
       }
     default:
       return state
