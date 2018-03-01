@@ -17,8 +17,7 @@ class App extends Component {
   }
   render() {
     const noCategories = this.props.categories.allNames.length === 0
-    const noIds = this.props.posts.allIds.length === 0
-    if (noCategories || noIds) {
+    if (noCategories) {
       return null
     }
     return (
