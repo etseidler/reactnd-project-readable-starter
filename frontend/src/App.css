@@ -113,25 +113,6 @@ body.ReactModal__Body--open {
   height: 32px;
   padding-left: 3px;
 }
-.post-modify-controls {
-  margin-right: 0.25em;
-  font-size: larger;
-}
-.post-edit-icon {
-  margin-right: 0.5em;
-  color: #444;
-  cursor: pointer;
-}
-.post-edit-icon:active {
-  color: #000;
-}
-.post-delete-icon {
-  color: #444;
-  cursor: pointer;
-}
-.post-delete-icon:active {
-  color: #000;
-}
 
 /* vote control */
 
@@ -149,6 +130,28 @@ body.ReactModal__Body--open {
 }
 .vote-control:hover {
   cursor: pointer;
+}
+
+/* modify control */
+
+.modify-control {
+  margin-right: 0.25em;
+  font-size: larger;
+}
+.edit-icon {
+  margin-right: 0.5em;
+  color: #444;
+  cursor: pointer;
+}
+.edit-icon:active {
+  color: #000;
+}
+.delete-icon {
+  color: #444;
+  cursor: pointer;
+}
+.delete-icon:active {
+  color: #000;
 }
 
 /* modal */

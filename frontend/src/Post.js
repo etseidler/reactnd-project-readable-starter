@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import VoteControl from './VoteControl'
+import ModifyControl from './ModifyControl'
 import { downvotePost, upvotePost, deletePost, openModal } from './actions'
 import { downvotePostRequest, upvotePostRequest, deletePostRequest } from './utils/api'
 
@@ -11,6 +12,7 @@ class Post extends Component {
 
     this.upvote = this.upvote.bind(this)
     this.downvote = this.downvote.bind(this)
+    this.delete = this.delete.bind(this)
   }
   downvote(id) {
     downvotePostRequest(id).then(() => this.props.downvote(id))
@@ -38,10 +40,7 @@ class Post extends Component {
             <div className="post-author">by {author}</div>
           </div>
         </div>
-        <div className="post-modify-controls">
-          <i className="post-edit-icon icon ion-edit" onClick={() => this.props.openModal()} />
-          <i className="post-delete-icon icon ion-trash-b" onClick={() => this.delete(id)} />
-        </div>
+        <ModifyControl onEdit={this.props.openModal} onDelete={() => this.delete(id)} />
       </div>
     )
   }
