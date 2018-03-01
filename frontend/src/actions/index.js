@@ -10,6 +10,8 @@ export const OPEN_MODAL = 'OPEN_MODAL'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY'
 export const UPDATE_SORT_ORDER = 'UPDATE_SORT_ORDER'
+export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT'
+export const UPVOTE_COMMENT = 'UPVOTE_COMMENT'
 
 export function loadCategories(categories) {
   return {
@@ -92,5 +94,19 @@ export function updateSortOrder(sortOrder) {
   return {
     type: UPDATE_SORT_ORDER,
     sortOrder
+  }
+}
+
+export function downvoteComment(id) {
+  return {
+    type: DOWNVOTE_COMMENT,
+    id
+  }
+}
+
+export function upvoteComment(id) {
+  return {
+    type: UPVOTE_COMMENT,
+    id
   }
 }

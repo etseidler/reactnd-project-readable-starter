@@ -30,6 +30,14 @@ export function upvotePostRequest(id) {
   return votePost(id, 'upVote')
 }
 
+export function downvoteCommentRequest(id) {
+  return voteComment(id, 'downVote')
+}
+
+export function upvoteCommentRequest(id) {
+  return voteComment(id, 'upVote')
+}
+
 export function deletePostRequest(id) {
   const request = {
     headers,
@@ -72,4 +80,16 @@ function votePost(id, option) {
     })
   }
   return fetch(`${BASE_URL}/posts/${id}`, request)
+}
+
+function voteComment(id, option) {
+  headers['Content-Type'] = 'application/json'
+  const request = {
+    headers,
+    method: 'POST',
+    body: JSON.stringify({
+      option
+    })
+  }
+  return fetch(`${BASE_URL}/comments/${id}`, request)
 }
