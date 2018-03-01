@@ -72,20 +72,6 @@ body.ReactModal__Body--open {
   white-space: pre;
   align-self: center;
 }
-.post-vote-controls {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin-left: 0.25em;
-  position: relative;
-  top: 0.05em;
-}
-.post-vote-icon:active {
-  color: #000;
-}
-.post-vote-controls:hover {
-  cursor: pointer;
-}
 .post-main {
   flex: 4;
 }
@@ -145,6 +131,23 @@ body.ReactModal__Body--open {
 }
 .post-delete-icon:active {
   color: #000;
+}
+
+/* vote control */
+
+.vote-control {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-left: 0.25em;
+  position: relative;
+  top: 0.05em;
+}
+.vote-icon:active {
+  color: #000;
+}
+.vote-control:hover {
+  cursor: pointer;
 }
 
 /* modal */
