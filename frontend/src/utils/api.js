@@ -39,19 +39,11 @@ export function upvoteCommentRequest(id) {
 }
 
 export function deletePostRequest(id) {
-  const request = {
-    headers,
-    method: 'DELETE'
-  }
-  return fetch(`${BASE_URL}/posts/${id}`, request)
+  return deleteItem('post', id)
 }
 
 export function deleteCommentRequest(id) {
-  const request = {
-    headers,
-    method: 'DELETE'
-  }
-  return fetch(`${BASE_URL}/comments/${id}`, request)
+  return deleteItem('comment', id)
 }
 
 export function createNewPostRequest(newPostData) {
@@ -86,6 +78,14 @@ function voteItem(type, id, option) {
     body: JSON.stringify({
       option
     })
+  }
+  return fetch(`${BASE_URL}/${type}s/${id}`, request)
+}
+
+function deleteItem(type, id) {
+  const request = {
+    headers,
+    method: 'DELETE'
   }
   return fetch(`${BASE_URL}/${type}s/${id}`, request)
 }
