@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { changeCategory, loadPostComments } from './actions'
 import { getPostCommentsRequest } from './utils/api'
+import Comment from './Comment'
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -19,20 +20,9 @@ class PostDetail extends Component {
         <div className="post-detail-voteScore">{voteScore}</div>
         <div className="post-detail-comments">
           <div className="comments-header">Comments</div>
-          {this.props.comments.allIds.map((commentId) => {
-            const {
-              author: commentAuthor,
-              voteScore: commentVoteScore,
-              body: commentBody
-            } = this.props.comments.byId[commentId]
-            return (
-              <div key={commentId} className="comment">
-                <div className="comment-body">{commentBody}</div>
-                <div className="comment-author">{commentAuthor}</div>
-                <div className="comment-vote-score">{commentVoteScore}</div>
-              </div>
-            )
-          })}
+          {this.props.comments.allIds.map(id => (
+            <Comment key={id} comment={this.props.comments.byId[id]} />
+          ))}
         </div>
       </div>
     )
