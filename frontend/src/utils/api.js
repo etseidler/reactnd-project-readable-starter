@@ -23,19 +23,19 @@ export function getPostCommentsRequest(id) {
 }
 
 export function downvotePostRequest(id) {
-  return votePost(id, 'downVote')
+  return voteItem('post', id, 'downVote')
 }
 
 export function upvotePostRequest(id) {
-  return votePost(id, 'upVote')
+  return voteItem('post', id, 'upVote')
 }
 
 export function downvoteCommentRequest(id) {
-  return voteComment(id, 'downVote')
+  return voteItem('comment', id, 'downVote')
 }
 
 export function upvoteCommentRequest(id) {
-  return voteComment(id, 'upVote')
+  return voteItem('comment', id, 'upVote')
 }
 
 export function deletePostRequest(id) {
@@ -70,7 +70,7 @@ export function editPostRequest(id, postData) {
     .then(data => data)
 }
 
-function votePost(id, option) {
+function voteItem(type, id, option) {
   headers['Content-Type'] = 'application/json'
   const request = {
     headers,
@@ -79,17 +79,5 @@ function votePost(id, option) {
       option
     })
   }
-  return fetch(`${BASE_URL}/posts/${id}`, request)
-}
-
-function voteComment(id, option) {
-  headers['Content-Type'] = 'application/json'
-  const request = {
-    headers,
-    method: 'POST',
-    body: JSON.stringify({
-      option
-    })
-  }
-  return fetch(`${BASE_URL}/comments/${id}`, request)
+  return fetch(`${BASE_URL}/${type}s/${id}`, request)
 }
