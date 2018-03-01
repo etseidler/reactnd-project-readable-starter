@@ -33,7 +33,7 @@ class Comment extends Component {
         <div className="comment-body">{body}</div>
         <div className="comment-author">{author}</div>
         <div className="comment-vote-score">{voteScore}</div>
-        <VoteControl upvote={this.upvote} downvote={this.downvote} id={id} />
+        <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />
         <ModifyControl onEdit={() => {}} onDelete={() => this.delete(id)} />
       </div>
     )

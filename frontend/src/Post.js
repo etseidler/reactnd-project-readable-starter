@@ -31,7 +31,7 @@ class Post extends Component {
       <div className="post-item">
         <div className="post-vote">
           <div className="post-vote-score">{voteScore.toString().padStart(5)}</div>
-          <VoteControl upvote={this.upvote} downvote={this.downvote} id={id} />
+          <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />
         </div>
         <div className="post-main">
           <div className="post-title"><Link to={`/${category}/${id}`}>{title}</Link></div>
