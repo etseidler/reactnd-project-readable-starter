@@ -17,8 +17,31 @@ class PostDetail extends Component {
         <div className="post-detail-author">{author}</div>
         <div className="post-detail-comment-count">{commentCount}</div>
         <div className="post-detail-voteScore">{voteScore}</div>
+        <div className="post-detail-comments">
+          <div className="comments-header">Comments</div>
+          {this.props.comments.allIds.map((commentId) => {
+            const {
+              author: commentAuthor,
+              voteScore: commentVoteScore,
+              body: commentBody
+            } = this.props.comments.byId[commentId]
+            return (
+              <div key={commentId} className="comment">
+                <div className="comment-body">{commentBody}</div>
+                <div className="comment-author">{commentAuthor}</div>
+                <div className="comment-vote-score">{commentVoteScore}</div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
+  }
+}
+
+function mapStateToProps({ comments }) {
+  return {
+    comments
   }
 }
 
@@ -30,6 +53,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(PostDetail)
