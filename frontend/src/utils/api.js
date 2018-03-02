@@ -46,36 +46,36 @@ export function deleteCommentRequest(id) {
   return deleteItem('comment', id)
 }
 
-export function createNewCommentRequest(newCommentData) {
+export function createNewCommentRequest(newData) {
   headers['Content-Type'] = 'application/json'
   const request = {
     headers,
     method: 'POST',
-    body: JSON.stringify(newCommentData)
+    body: JSON.stringify(newData)
   }
   return fetch(`${BASE_URL}/comments`, request)
     .then(res => res.json())
     .then(data => data)
 }
 
-export function createNewPostRequest(newPostData) {
+export function createNewPostRequest(newData) {
   headers['Content-Type'] = 'application/json'
   const request = {
     headers,
     method: 'POST',
-    body: JSON.stringify(newPostData)
+    body: JSON.stringify(newData)
   }
   return fetch(`${BASE_URL}/posts`, request)
     .then(res => res.json())
     .then(data => data)
 }
 
-export function editPostRequest(id, postData) {
+export function editPostRequest(id, updateData) {
   headers['Content-Type'] = 'application/json'
   const request = {
     headers,
     method: 'PUT',
-    body: JSON.stringify(postData)
+    body: JSON.stringify(updateData)
   }
   return fetch(`${BASE_URL}/posts/${id}`, request)
     .then(res => res.json())
