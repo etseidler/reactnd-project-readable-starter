@@ -6,6 +6,8 @@ import {
   CHANGE_CATEGORY,
   DOWNVOTE_POST,
   UPVOTE_POST,
+  ADD_POST_COMMENT,
+  DELETE_POST_COMMENT,
   DELETE_POST,
   UPDATE_SORT_ORDER
 } from '../actions'
@@ -84,6 +86,28 @@ function posts(state = defaultPostState, action) {
           [postId]: {
             ...post,
             voteScore: post.voteScore + 1
+          }
+        }
+      }
+    case ADD_POST_COMMENT:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [postId]: {
+            ...post,
+            commentCount: post.commentCount + 1
+          }
+        }
+      }
+    case DELETE_POST_COMMENT:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [postId]: {
+            ...post,
+            commentCount: post.commentCount - 1
           }
         }
       }

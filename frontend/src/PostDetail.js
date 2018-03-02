@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v4'
-import { changeCategory, loadPostComments, addNewComment } from './actions'
+import { changeCategory, loadPostComments, addNewComment, addPostComment } from './actions'
 import { getPostCommentsRequest, createNewCommentRequest } from './utils/api'
 import Comment from './Comment'
 
@@ -32,7 +32,10 @@ class PostDetail extends Component {
       author: this.state.commentAuthor,
       parentId: this.props.post.id
     }
-    createNewCommentRequest(newCommentData).then(this.props.addNewComment)
+    createNewCommentRequest(newCommentData).then((comment) => {
+      this.props.addNewComment(comment)
+      this.props.addPostComment(this.props.post.id)
+    })
     this.setState({ commentBody: '', commentAuthor: '' })
   }
   render() {
@@ -98,7 +101,8 @@ function mapDispatchToProps(dispatch) {
   return {
     changeCategory: category => dispatch(changeCategory(category)),
     loadPostComments: comments => dispatch(loadPostComments(comments)),
-    addNewComment: comment => dispatch(addNewComment(comment))
+    addNewComment: comment => dispatch(addNewComment(comment)),
+    addPostComment: postId => dispatch(addPostComment(postId))
   }
 }
 

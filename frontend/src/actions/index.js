@@ -4,6 +4,8 @@ export const LOAD_POST_COMMENTS = 'LOAD_POST_COMMENTS'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const UPVOTE_POST = 'UPVOTE_POST'
+export const ADD_POST_COMMENT = 'ADD_POST_COMMENT'
+export const DELETE_POST_COMMENT = 'DELETE_POST_COMMENT'
 export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const OPEN_MODAL = 'OPEN_MODAL'
@@ -74,6 +76,20 @@ export function upvotePost(id) {
 export function deletePost(id) {
   return {
     type: DELETE_POST,
+    id
+  }
+}
+
+export function addPostComment(id) {
+  return {
+    type: ADD_POST_COMMENT,
+    id
+  }
+}
+
+export function deletePostComment(id) {
+  return {
+    type: DELETE_POST_COMMENT,
     id
   }
 }
