@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { downvoteCommentRequest, upvoteCommentRequest, deleteCommentRequest } from './utils/api'
-import { downvoteComment, upvoteComment, deleteComment, deletePostComment } from './actions'
+import { downvoteCommentRequest, upvoteCommentRequest, deleteCommentRequest, editCommentRequest } from './utils/api'
+import { downvoteComment, upvoteComment, deleteComment, updateComment, deletePostComment } from './actions'
 import VoteControl from './VoteControl'
 import ModifyControl from './ModifyControl'
 
@@ -9,9 +9,34 @@ class Comment extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      body: props.comment.body,
+      editMode: false
+    }
+
     this.upvote = this.upvote.bind(this)
     this.downvote = this.downvote.bind(this)
     this.delete = this.delete.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleChange({ target: { value } }) {
+    this.setState({ body: value })
+  }
+  handleCancel() {
+    this.setState({
+      body: this.props.comment.body,
+      editMode: false
+    })
+  }
+  handleSubmit() {
+    const updateCommentData = {
+      body: this.state.body
+    }
+    editCommentRequest(this.props.comment.id, updateCommentData)
+      .then(this.props.update)
+    this.setState({ editMode: false })
   }
   downvote(id) {
     downvoteCommentRequest(id).then(() => this.props.downvote(id))
@@ -32,15 +57,26 @@ class Comment extends Component {
       body,
       id
     } = this.props.comment
-    return (
-      <div className="comment">
-        <div className="comment-body">{body}</div>
-        <div className="comment-author">{author}</div>
-        <div className="comment-vote-score">{voteScore}</div>
-        <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />
-        <ModifyControl onEdit={() => {}} onDelete={() => this.delete(id)} />
-      </div>
-    )
+    return this.state.editMode
+      ? (
+        <div className="comment-edit-mode">
+          <textarea defaultValue={this.state.body} onChange={this.handleChange} />
+          <button onClick={this.handleCancel}>Cancel</button>
+          <button onClick={this.handleSubmit}>Submit</button>
+        </div>
+      )
+      : (
+        <div className="comment">
+          <div className="comment-body">{body}</div>
+          <div className="comment-author">{author}</div>
+          <div className="comment-vote-score">{voteScore}</div>
+          <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />
+          <ModifyControl
+            onEdit={() => this.setState({ editMode: true })}
+            onDelete={() => this.delete(id)}
+          />
+        </div>
+      )
   }
 }
 
@@ -49,6 +85,7 @@ function mapDispatchToProps(dispatch) {
     downvote: id => dispatch(downvoteComment(id)),
     upvote: id => dispatch(upvoteComment(id)),
     delete: id => dispatch(deleteComment(id)),
+    update: comment => dispatch(updateComment(comment)),
     deletePostComment: postId => dispatch(deletePostComment(postId))
   }
 }

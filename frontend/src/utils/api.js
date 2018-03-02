@@ -58,6 +58,18 @@ export function createNewCommentRequest(newData) {
     .then(data => data)
 }
 
+export function editCommentRequest(id, updateData) {
+  headers['Content-Type'] = 'application/json'
+  const request = {
+    headers,
+    method: 'PUT',
+    body: JSON.stringify(updateData)
+  }
+  return fetch(`${BASE_URL}/comments/${id}`, request)
+    .then(res => res.json())
+    .then(data => data)
+}
+
 export function createNewPostRequest(newData) {
   headers['Content-Type'] = 'application/json'
   const request = {

@@ -16,6 +16,7 @@ export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT'
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT'
+export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 
 export function loadCategories(categories) {
   return {
@@ -133,6 +134,13 @@ export function deleteComment(id) {
   return {
     type: DELETE_COMMENT,
     id
+  }
+}
+
+export function updateComment(comment) {
+  return {
+    type: UPDATE_COMMENT,
+    comment
   }
 }
 

@@ -3,6 +3,7 @@ import {
   DOWNVOTE_COMMENT,
   UPVOTE_COMMENT,
   DELETE_COMMENT,
+  UPDATE_COMMENT,
   ADD_NEW_COMMENT
 } from '../actions'
 
@@ -43,6 +44,14 @@ function comments(state = defaultCommentsState, action) {
             ...comment,
             voteScore: comment.voteScore + 1
           }
+        }
+      }
+    case UPDATE_COMMENT:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.comment.id]: action.comment
         }
       }
     case DELETE_COMMENT:
