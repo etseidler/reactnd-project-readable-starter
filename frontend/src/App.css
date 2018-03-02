@@ -154,6 +154,12 @@ body.ReactModal__Body--open {
   color: #000;
 }
 
+/* comments */
+
+.comments-add-new {
+  border: 1px solid #000;
+}
+
 /* modal */
 
 .modal-container {

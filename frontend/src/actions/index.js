@@ -13,6 +13,7 @@ export const UPDATE_SORT_ORDER = 'UPDATE_SORT_ORDER'
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT'
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT'
 
 export function loadCategories(categories) {
   return {
@@ -116,5 +117,12 @@ export function deleteComment(id) {
   return {
     type: DELETE_COMMENT,
     id
+  }
+}
+
+export function addNewComment(comment) {
+  return {
+    type: ADD_NEW_COMMENT,
+    comment
   }
 }

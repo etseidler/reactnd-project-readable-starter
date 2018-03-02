@@ -46,6 +46,18 @@ export function deleteCommentRequest(id) {
   return deleteItem('comment', id)
 }
 
+export function createNewCommentRequest(newCommentData) {
+  headers['Content-Type'] = 'application/json'
+  const request = {
+    headers,
+    method: 'POST',
+    body: JSON.stringify(newCommentData)
+  }
+  return fetch(`${BASE_URL}/comments`, request)
+    .then(res => res.json())
+    .then(data => data)
+}
+
 export function createNewPostRequest(newPostData) {
   headers['Content-Type'] = 'application/json'
   const request = {
