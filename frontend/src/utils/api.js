@@ -47,51 +47,19 @@ export function deleteCommentRequest(id) {
 }
 
 export function createNewCommentRequest(newData) {
-  headers['Content-Type'] = 'application/json'
-  const request = {
-    headers,
-    method: 'POST',
-    body: JSON.stringify(newData)
-  }
-  return fetch(`${BASE_URL}/comments`, request)
-    .then(res => res.json())
-    .then(data => data)
+  return createItem('comment', newData)
 }
 
 export function editCommentRequest(id, updateData) {
-  headers['Content-Type'] = 'application/json'
-  const request = {
-    headers,
-    method: 'PUT',
-    body: JSON.stringify(updateData)
-  }
-  return fetch(`${BASE_URL}/comments/${id}`, request)
-    .then(res => res.json())
-    .then(data => data)
+  return editItem('comment', id, updateData)
 }
 
 export function createNewPostRequest(newData) {
-  headers['Content-Type'] = 'application/json'
-  const request = {
-    headers,
-    method: 'POST',
-    body: JSON.stringify(newData)
-  }
-  return fetch(`${BASE_URL}/posts`, request)
-    .then(res => res.json())
-    .then(data => data)
+  return createItem('post', newData)
 }
 
 export function editPostRequest(id, updateData) {
-  headers['Content-Type'] = 'application/json'
-  const request = {
-    headers,
-    method: 'PUT',
-    body: JSON.stringify(updateData)
-  }
-  return fetch(`${BASE_URL}/posts/${id}`, request)
-    .then(res => res.json())
-    .then(data => data)
+  return editItem('post', id, updateData)
 }
 
 function voteItem(type, id, option) {
@@ -112,4 +80,28 @@ function deleteItem(type, id) {
     method: 'DELETE'
   }
   return fetch(`${BASE_URL}/${type}s/${id}`, request)
+}
+
+function createItem(type, newData) {
+  headers['Content-Type'] = 'application/json'
+  const request = {
+    headers,
+    method: 'POST',
+    body: JSON.stringify(newData)
+  }
+  return fetch(`${BASE_URL}/${type}s`, request)
+    .then(res => res.json())
+    .then(data => data)
+}
+
+function editItem(type, id, updateData) {
+  headers['Content-Type'] = 'application/json'
+  const request = {
+    headers,
+    method: 'PUT',
+    body: JSON.stringify(updateData)
+  }
+  return fetch(`${BASE_URL}/${type}s/${id}`, request)
+    .then(res => res.json())
+    .then(data => data)
 }
