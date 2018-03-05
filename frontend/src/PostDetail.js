@@ -11,7 +11,8 @@ class PostDetail extends Component {
 
     this.state = {
       commentBody: '',
-      commentAuthor: ''
+      commentAuthor: '',
+      submitDisabled: true
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -22,7 +23,14 @@ class PostDetail extends Component {
     getPostCommentsRequest(this.props.post.id).then(this.props.loadPostComments)
   }
   handleChange({ target: { name, value } }) {
-    this.setState({ [name]: value });
+    this.setState(
+      { [name]: value },
+      () => {
+        const { commentBody, commentAuthor } = this.state
+        const submitDisabled = !(commentBody && commentAuthor)
+        this.setState({ submitDisabled })
+      }
+    );
   }
   handleSubmit() {
     const newCommentData = {
@@ -36,7 +44,11 @@ class PostDetail extends Component {
       this.props.addNewComment(comment)
       this.props.addPostComment(this.props.post.id)
     })
-    this.setState({ commentBody: '', commentAuthor: '' })
+    this.setState({
+      commentBody: '',
+      commentAuthor: '',
+      submitDisabled: true
+    })
   }
   render() {
     const { title, body, author, commentCount, voteScore } = this.props.post
@@ -76,6 +88,7 @@ class PostDetail extends Component {
             <button
               className="comment-submit"
               onClick={this.handleSubmit}
+              disabled={this.state.submitDisabled}
             >
               Submit
             </button>
