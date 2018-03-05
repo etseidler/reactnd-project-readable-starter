@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import uuid from 'uuid/v4'
-import { changeCategory, loadPostComments, addNewComment, addPostComment, deletePost } from './actions'
+import { changeCategory, loadPostComments, addNewComment, addPostComment, deletePost, openModal } from './actions'
 import { getPostCommentsRequest, createNewCommentRequest, deletePostRequest } from './utils/api'
 import Comment from './Comment'
 import ModifyControl from './ModifyControl'
@@ -68,7 +68,7 @@ class PostDetail extends Component {
         <div className="post-detail-author">{author}</div>
         <div className="post-detail-comment-count">{commentCount}</div>
         <div className="post-detail-voteScore">{voteScore}</div>
-        <ModifyControl onEdit={() => {}} onDelete={() => this.delete(id)} />
+        <ModifyControl onEdit={this.props.openModal} onDelete={() => this.delete(id)} />
         <div className="post-detail-comments">
           <div className="comments-header">Comments</div>
           <div className="comments-add-new">
@@ -120,13 +120,30 @@ function mapStateToProps({ comments }) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
+  const {
+    title,
+    author,
+    category: editPostCategory,
+    body,
+    id: editPostId
+  } = ownProps.post
   return {
     changeCategory: category => dispatch(changeCategory(category)),
     loadPostComments: comments => dispatch(loadPostComments(comments)),
     addNewComment: comment => dispatch(addNewComment(comment)),
     addPostComment: postId => dispatch(addPostComment(postId)),
-    delete: id => dispatch(deletePost(id))
+    delete: id => dispatch(deletePost(id)),
+    openModal: () => dispatch(openModal(
+      'Edit Post',
+      {
+        title,
+        author,
+        category: editPostCategory,
+        body,
+        id: editPostId
+      }
+    ))
   }
 }
 
