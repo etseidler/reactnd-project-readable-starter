@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import uuid from 'uuid/v4'
-import { changeCategory, loadPostComments, addNewComment, addPostComment } from './actions'
-import { getPostCommentsRequest, createNewCommentRequest } from './utils/api'
+import { changeCategory, loadPostComments, addNewComment, addPostComment, deletePost } from './actions'
+import { getPostCommentsRequest, createNewCommentRequest, deletePostRequest } from './utils/api'
 import Comment from './Comment'
+import ModifyControl from './ModifyControl'
 
 class PostDetail extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class PostDetail extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.delete = this.delete.bind(this)
   }
   componentDidMount() {
     this.props.changeCategory(this.props.post.category)
@@ -50,8 +53,14 @@ class PostDetail extends Component {
       submitDisabled: true
     })
   }
+  delete(id) {
+    deletePostRequest(id).then(() => {
+      this.props.delete(id)
+      this.props.history.push('/')
+    })
+  }
   render() {
-    const { title, body, author, commentCount, voteScore } = this.props.post
+    const { title, body, author, commentCount, voteScore, id } = this.props.post
     return (
       <div className="post-detail">
         <div className="post-detail-title">{title}</div>
@@ -59,6 +68,7 @@ class PostDetail extends Component {
         <div className="post-detail-author">{author}</div>
         <div className="post-detail-comment-count">{commentCount}</div>
         <div className="post-detail-voteScore">{voteScore}</div>
+        <ModifyControl onEdit={() => {}} onDelete={() => this.delete(id)} />
         <div className="post-detail-comments">
           <div className="comments-header">Comments</div>
           <div className="comments-add-new">
@@ -94,8 +104,8 @@ class PostDetail extends Component {
             </button>
           </div>
           <div className="comments-list">
-            {this.props.comments.allIds.map(id => (
-              <Comment key={id} comment={this.props.comments.byId[id]} />
+            {this.props.comments.allIds.map(commentId => (
+              <Comment key={commentId} comment={this.props.comments.byId[commentId]} />
             ))}
           </div>
         </div>
@@ -115,11 +125,12 @@ function mapDispatchToProps(dispatch) {
     changeCategory: category => dispatch(changeCategory(category)),
     loadPostComments: comments => dispatch(loadPostComments(comments)),
     addNewComment: comment => dispatch(addNewComment(comment)),
-    addPostComment: postId => dispatch(addPostComment(postId))
+    addPostComment: postId => dispatch(addPostComment(postId)),
+    delete: id => dispatch(deletePost(id))
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostDetail)
+)(PostDetail))
