@@ -11,7 +11,8 @@ class Comment extends Component {
 
     this.state = {
       body: props.comment.body,
-      editMode: false
+      editMode: false,
+      submitDisabled: true
     }
 
     this.upvote = this.upvote.bind(this)
@@ -22,12 +23,17 @@ class Comment extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleChange({ target: { value } }) {
-    this.setState({ body: value })
+    const submitDisabled = !value
+    this.setState({
+      body: value,
+      submitDisabled
+    })
   }
   handleCancel() {
     this.setState({
       body: this.props.comment.body,
-      editMode: false
+      editMode: false,
+      submitDisabled: true
     })
   }
   handleSubmit() {
@@ -36,7 +42,10 @@ class Comment extends Component {
     }
     editCommentRequest(this.props.comment.id, updateCommentData)
       .then(this.props.update)
-    this.setState({ editMode: false })
+    this.setState({
+      editMode: false,
+      submitDisabled: true
+    })
   }
   downvote(id) {
     downvoteCommentRequest(id).then(() => this.props.downvote(id))
@@ -62,7 +71,12 @@ class Comment extends Component {
         <div className="comment-edit-mode">
           <textarea defaultValue={this.state.body} onChange={this.handleChange} />
           <button onClick={this.handleCancel}>Cancel</button>
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button
+            onClick={this.handleSubmit}
+            disabled={this.state.submitDisabled}
+          >
+            Submit
+          </button>
         </div>
       )
       : (
