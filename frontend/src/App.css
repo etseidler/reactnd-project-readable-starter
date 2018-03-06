@@ -34,10 +34,14 @@ body.ReactModal__Body--open {
   color: #000;
   text-decoration: none;
 }
+.category-item a:hover {
+  text-decoration: underline;
+}
 
 .category-item.category-item-selected a {
   color: #EEE;
   text-shadow: 1px 1px #000;
+  text-decoration: none;
 }
 
 /* posts */
@@ -84,6 +88,10 @@ body.ReactModal__Body--open {
 }
 .post-title a {
   text-decoration: none;
+  color: #444;
+}
+.post-title a:hover {
+  text-decoration: underline;
 }
 .post-author {
   font-size: smaller;
@@ -252,4 +260,12 @@ body.ReactModal__Body--open {
 
 .not-found__return-to-main {
   margin-top: 1em;
+}
+
+.not-found__return-to-main a {
+  color: #444;
+  text-decoration: none;
+}
+.not-found__return-to-main a:hover {
+  text-decoration: underline;
 }
