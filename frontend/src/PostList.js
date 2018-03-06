@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateSortOrder, openModal, changeCategory } from './actions'
+import {
+  updateSortOrder,
+  openModal,
+  changeCategory
+} from './actions'
 import PostListSorter from './PostListSorter'
 import Post from './Post'
 import NotFound from './NotFound'

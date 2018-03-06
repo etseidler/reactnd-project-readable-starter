@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { downvoteCommentRequest, upvoteCommentRequest, deleteCommentRequest, editCommentRequest } from './utils/api'
-import { downvoteComment, upvoteComment, deleteComment, updateComment, deletePostComment } from './actions'
+import {
+  downvoteCommentRequest,
+  upvoteCommentRequest,
+  deleteCommentRequest,
+  editCommentRequest
+} from './utils/api'
+import {
+  downvoteComment,
+  upvoteComment,
+  deleteComment,
+  updateComment,
+  deletePostComment
+} from './actions'
 import VoteControl from './VoteControl'
 import ModifyControl from './ModifyControl'
 

@@ -3,8 +3,17 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import VoteControl from './VoteControl'
 import ModifyControl from './ModifyControl'
-import { downvotePost, upvotePost, deletePost, openModal } from './actions'
-import { downvotePostRequest, upvotePostRequest, deletePostRequest } from './utils/api'
+import {
+  downvotePost,
+  upvotePost,
+  deletePost,
+  openModal
+} from './actions'
+import {
+  downvotePostRequest,
+  upvotePostRequest,
+  deletePostRequest
+} from './utils/api'
 
 class Post extends Component {
   constructor(props) {
@@ -24,8 +33,15 @@ class Post extends Component {
     deletePostRequest(id).then(() => this.props.delete(id))
   }
   render() {
-    const { post:
-      { id, voteScore, title, commentCount, author, category }
+    const {
+      post: {
+        id,
+        voteScore,
+        title,
+        commentCount,
+        author,
+        category
+      }
     } = this.props
     return (
       <div className="post-item">

@@ -2,8 +2,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import uuid from 'uuid/v4'
-import { changeCategory, loadPostComments, addNewComment, addPostComment, deletePost, openModal, downvotePost, upvotePost } from './actions'
-import { getPostCommentsRequest, createNewCommentRequest, deletePostRequest, downvotePostRequest, upvotePostRequest } from './utils/api'
+import {
+  changeCategory,
+  loadPostComments,
+  addNewComment,
+  addPostComment,
+  deletePost,
+  openModal,
+  downvotePost,
+  upvotePost
+} from './actions'
+import {
+  getPostCommentsRequest,
+  createNewCommentRequest,
+  deletePostRequest,
+  downvotePostRequest,
+  upvotePostRequest
+} from './utils/api'
 import Comment from './Comment'
 import ModifyControl from './ModifyControl'
 import VoteControl from './VoteControl'

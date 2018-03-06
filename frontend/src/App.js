@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Route, Switch, Link, withRouter } from 'react-router-dom'
+import {
+  Route,
+  Switch,
+  Link,
+  withRouter
+} from 'react-router-dom'
 import { loadCategories, loadPosts } from './actions'
 import { getCategoriesRequest, getPostsRequest } from './utils/api'
 import PostModal from './PostModal'

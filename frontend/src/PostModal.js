@@ -4,7 +4,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import uuid from 'uuid/v4'
-import { addNewPost, closeModal, updatePost } from './actions'
+import {
+  addNewPost,
+  closeModal,
+  updatePost
+} from './actions'
 import { createNewPostRequest, editPostRequest } from './utils/api'
 import { capitalize } from './utils/helpers'
 
