@@ -40,7 +40,7 @@ class PostList extends Component {
           {this.props.categoryIds.map(id => <Post key={id} post={postsById[id]} />)}
         </div>
       )
-      : <NotFound text="No Posts Found" />
+      : <NotFound text="No Posts Found" hideMainPageLink={!this.props.currentCategory} />
     return (
       <div className="post-list-container">
         <i
@@ -59,7 +59,8 @@ function mapStateToProps(state) {
     {
       byId: postsById,
       sortOrder,
-      categoryIds
+      categoryIds,
+      category: currentCategory
     },
     categories,
     modal
@@ -67,6 +68,7 @@ function mapStateToProps(state) {
   return {
     postsById,
     categoryIds,
+    currentCategory,
     sortOrder,
     categories,
     modal
