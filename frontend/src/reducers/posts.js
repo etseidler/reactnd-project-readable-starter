@@ -30,11 +30,13 @@ function posts(state = defaultPostState, action) {
         acc[cur.id] = cur
         return acc
       }, {})
+      const categoryIds = allIds
+        .filter(id => !state.category || byId[id].category === state.category)
       return {
         ...state,
         byId,
         allIds,
-        categoryIds: allIds
+        categoryIds
       }
     }
     case ADD_NEW_POST:
