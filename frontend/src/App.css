@@ -93,6 +93,10 @@ body.ReactModal__Body--open {
 .post-title a:hover {
   text-decoration: underline;
 }
+.post-body {
+  font-size: x-large;
+  padding: 0.3em 0 0.5em 0;
+}
 .post-author {
   font-size: smaller;
 }

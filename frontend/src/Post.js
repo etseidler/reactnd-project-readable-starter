@@ -30,7 +30,12 @@ class Post extends Component {
     upvotePostRequest(id).then(() => this.props.upvote(id))
   }
   delete(id) {
-    deletePostRequest(id).then(() => this.props.delete(id))
+    deletePostRequest(id).then(() => {
+      this.props.delete(id)
+      if (this.props.onDelete) {
+        this.props.onDelete()
+      }
+    })
   }
   render() {
     const {
@@ -40,7 +45,8 @@ class Post extends Component {
         title,
         commentCount,
         author,
-        category
+        category,
+        body
       }
     } = this.props
     return (
@@ -50,7 +56,10 @@ class Post extends Component {
           <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />
         </div>
         <div className="post-main">
-          <div className="post-title"><Link to={`/${category}/${id}`}>{title}</Link></div>
+          <div className="post-title">
+            {this.props.detailMode ? title : <Link to={`/${category}/${id}`}>{title}</Link> }
+          </div>
+          {this.props.detailMode ? <div className="post-body">{body}</div> : null}
           <div className="post-minor">
             <div className="post-comment-count">{commentCount} comment{commentCount !== 1 ? 's' : ''}</div>
             <div className="post-author">by {author}</div>

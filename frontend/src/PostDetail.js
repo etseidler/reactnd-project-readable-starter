@@ -6,22 +6,14 @@ import {
   changeCategory,
   loadPostComments,
   addNewComment,
-  addPostComment,
-  deletePost,
-  openModal,
-  downvotePost,
-  upvotePost
+  addPostComment
 } from './actions'
 import {
   getPostCommentsRequest,
-  createNewCommentRequest,
-  deletePostRequest,
-  downvotePostRequest,
-  upvotePostRequest
+  createNewCommentRequest
 } from './utils/api'
 import Comment from './Comment'
-import ModifyControl from './ModifyControl'
-import VoteControl from './VoteControl'
+import Post from './Post'
 
 class PostDetail extends Component {
   constructor(props) {
@@ -35,7 +27,7 @@ class PostDetail extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.delete = this.delete.bind(this)
+    this.redirectToMainPage = this.redirectToMainPage.bind(this)
   }
   componentDidMount() {
     this.props.changeCategory(this.props.post.category)
@@ -69,29 +61,18 @@ class PostDetail extends Component {
       submitDisabled: true
     })
   }
-  downvote(id) {
-    downvotePostRequest(id).then(() => this.props.downvote(id))
-  }
-  upvote(id) {
-    upvotePostRequest(id).then(() => this.props.upvote(id))
-  }
-  delete(id) {
-    deletePostRequest(id).then(() => {
-      this.props.delete(id)
-      this.props.history.push('/')
-    })
+  redirectToMainPage() {
+    this.props.history.push('/')
   }
   render() {
-    const { title, body, author, commentCount, voteScore, id } = this.props.post
+    const { post } = this.props
     return (
       <div className="post-detail">
-        <div className="post-detail-title">{title}</div>
-        <div className="post-detail-body">{body}</div>
-        <div className="post-detail-author">{author}</div>
-        <div className="post-detail-comment-count">{commentCount}</div>
-        <div className="post-detail-voteScore">{voteScore}</div>
-        <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />
-        <ModifyControl onEdit={this.props.openModal} onDelete={() => this.delete(id)} />
+        <Post
+          post={post}
+          onDelete={this.redirectToMainPage}
+          detailMode
+        />
         <div className="post-detail-comments">
           <div className="comments-header">Comments</div>
           <div className="comments-add-new">
@@ -143,32 +124,12 @@ function mapStateToProps({ comments }) {
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  const {
-    title,
-    author,
-    category: editPostCategory,
-    body,
-    id: editPostId
-  } = ownProps.post
+function mapDispatchToProps(dispatch) {
   return {
     changeCategory: category => dispatch(changeCategory(category)),
     loadPostComments: comments => dispatch(loadPostComments(comments)),
     addNewComment: comment => dispatch(addNewComment(comment)),
-    addPostComment: postId => dispatch(addPostComment(postId)),
-    delete: id => dispatch(deletePost(id)),
-    downvote: id => dispatch(downvotePost(id)),
-    upvote: id => dispatch(upvotePost(id)),
-    openModal: () => dispatch(openModal(
-      'Edit Post',
-      {
-        title,
-        author,
-        category: editPostCategory,
-        body,
-        id: editPostId
-      }
-    ))
+    addPostComment: postId => dispatch(addPostComment(postId))
   }
 }
 
