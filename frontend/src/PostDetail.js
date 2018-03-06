@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import uuid from 'uuid/v4'
-import { changeCategory, loadPostComments, addNewComment, addPostComment, deletePost, openModal } from './actions'
-import { getPostCommentsRequest, createNewCommentRequest, deletePostRequest } from './utils/api'
+import { changeCategory, loadPostComments, addNewComment, addPostComment, deletePost, openModal, downvotePost, upvotePost } from './actions'
+import { getPostCommentsRequest, createNewCommentRequest, deletePostRequest, downvotePostRequest, upvotePostRequest } from './utils/api'
 import Comment from './Comment'
 import ModifyControl from './ModifyControl'
+import VoteControl from './VoteControl'
 
 class PostDetail extends Component {
   constructor(props) {
@@ -53,6 +54,12 @@ class PostDetail extends Component {
       submitDisabled: true
     })
   }
+  downvote(id) {
+    downvotePostRequest(id).then(() => this.props.downvote(id))
+  }
+  upvote(id) {
+    upvotePostRequest(id).then(() => this.props.upvote(id))
+  }
   delete(id) {
     deletePostRequest(id).then(() => {
       this.props.delete(id)
@@ -68,6 +75,7 @@ class PostDetail extends Component {
         <div className="post-detail-author">{author}</div>
         <div className="post-detail-comment-count">{commentCount}</div>
         <div className="post-detail-voteScore">{voteScore}</div>
+        <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />
         <ModifyControl onEdit={this.props.openModal} onDelete={() => this.delete(id)} />
         <div className="post-detail-comments">
           <div className="comments-header">Comments</div>
@@ -134,6 +142,8 @@ function mapDispatchToProps(dispatch, ownProps) {
     addNewComment: comment => dispatch(addNewComment(comment)),
     addPostComment: postId => dispatch(addPostComment(postId)),
     delete: id => dispatch(deletePost(id)),
+    downvote: id => dispatch(downvotePost(id)),
+    upvote: id => dispatch(upvotePost(id)),
     openModal: () => dispatch(openModal(
       'Edit Post',
       {
