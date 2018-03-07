@@ -126,6 +126,12 @@ body.ReactModal__Body--open {
   padding-left: 3px;
 }
 
+/* post detail */
+
+.post-detail {
+  padding: 0.4em 1.25em;
+}
+
 /* vote control */
 
 .vote-control {
