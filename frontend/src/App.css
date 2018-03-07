@@ -172,10 +172,9 @@ body.ReactModal__Body--open {
   color: #000;
 }
 
-/* comments */
+/* add new comments */
 
 .comments-add-new {
-  /* border: 1px solid #000; */
   display: flex;
   flex-direction: column;
   padding: 0.5em 1.25em;
@@ -209,6 +208,9 @@ body.ReactModal__Body--open {
 .comment-submit:disabled {
   border: 1px solid rgba(0,0,0,.25)
 }
+
+/* comments */
+
 .comment {
   padding: 0.5em 0;
   display: flex;
