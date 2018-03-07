@@ -177,6 +177,47 @@ body.ReactModal__Body--open {
 .comments-add-new {
   border: 1px solid #000;
 }
+.comment {
+  padding: 0.5em 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.comment-vote {
+  display: flex;
+  flex-direction: row;
+  color: #BBB;
+  margin-right: 0.8em;
+}
+.comment-vote-score {
+  font-size: large;
+  font-weight: bold;
+  white-space: pre;
+  align-self: center;
+}
+.comment-main {
+  flex: 4;
+}
+.comment-author {
+  font-size: smaller;
+}
+.comment-edit-mode {
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+}
+.comment-edit-mode textarea {
+  font-size: medium;
+  height: 60px;
+}
+.comment-edit-mode button:hover {
+  cursor: pointer;
+}
+.comment-edit-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 /* modal */
 

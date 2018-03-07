@@ -81,21 +81,27 @@ class Comment extends Component {
       ? (
         <div className="comment-edit-mode">
           <textarea defaultValue={this.state.body} onChange={this.handleChange} />
-          <button onClick={this.handleCancel}>Cancel</button>
-          <button
-            onClick={this.handleSubmit}
-            disabled={this.state.submitDisabled}
-          >
-            Submit
-          </button>
+          <div className="comment-edit-buttons">
+            <button onClick={this.handleCancel}>Cancel</button>
+            <button
+              onClick={this.handleSubmit}
+              disabled={this.state.submitDisabled}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       )
       : (
         <div className="comment">
-          <div className="comment-body">{body}</div>
-          <div className="comment-author">{author}</div>
-          <div className="comment-vote-score">{voteScore}</div>
-          <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />
+          <div className="comment-vote">
+            <div className="comment-vote-score">{voteScore.toString().padStart(5)}</div>
+            <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />  
+          </div>
+          <div className="comment-main">
+            <div className="comment-body">{body}</div>
+            <div className="comment-author">by {author}</div>
+          </div>
           <ModifyControl
             onEdit={() => this.setState({ editMode: true })}
             onDelete={() => this.delete(id)}
