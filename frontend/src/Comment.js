@@ -95,7 +95,7 @@ class Comment extends Component {
       : (
         <div className="comment">
           <div className="comment-vote">
-            <div className="comment-vote-score">{voteScore.toString().padStart(5)}</div>
+            <div className="comment-vote-score">{voteScore.toString().padStart(4)}</div>
             <VoteControl upvote={() => this.upvote(id)} downvote={() => this.downvote(id)} />  
           </div>
           <div className="comment-main">

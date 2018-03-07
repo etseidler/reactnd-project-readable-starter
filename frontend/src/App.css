@@ -71,10 +71,11 @@ body.ReactModal__Body--open {
   margin-right: 0.8em;  
 }
 .post-vote-score {
-  font-size: large;
+  font-size: larger;
   font-weight: bold;
   white-space: pre;
   align-self: center;
+  font-family: "Roboto Mono", monospace;
 }
 .post-main {
   flex: 4;
@@ -225,10 +226,11 @@ body.ReactModal__Body--open {
   margin-right: 0.8em;
 }
 .comment-vote-score {
-  font-size: large;
+  font-size: larger;
   font-weight: bold;
   white-space: pre;
   align-self: center;
+  font-family: "Roboto Mono", monospace;
 }
 .comment-main {
   flex: 4;
