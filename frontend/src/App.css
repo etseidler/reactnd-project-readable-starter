@@ -175,7 +175,39 @@ body.ReactModal__Body--open {
 /* comments */
 
 .comments-add-new {
+  /* border: 1px solid #000; */
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 1.25em;
+}
+.comments-add-new-header {
+  font-size: larger;
+}
+.comments-add-new label {
+  font-size: large;
+}
+.comments-add-new textarea {
+  height: 60px;
+}
+.comments-add-new textarea,
+.comments-add-new input {
+  font-size: medium;
+  width: 50%;
   border: 1px solid #000;
+}
+.comment-submit {
+  width: 25%;
+  padding: 0.25em 0;
+  margin: 0.5em 0;
+  background-color: #CCC;
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 5px 0;
+  cursor: pointer;
+  font-size: inherit;
+}
+.comment-submit:disabled {
+  border: 1px solid rgba(0,0,0,.25)
 }
 .comment {
   padding: 0.5em 0;

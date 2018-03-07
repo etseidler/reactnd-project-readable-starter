@@ -74,7 +74,6 @@ class PostDetail extends Component {
           detailMode
         />
         <div className="post-detail-comments">
-          <div className="comments-header">Comments</div>
           <div className="comments-add-new">
             <div className="comments-add-new-header">Add New Comment</div>
             <label htmlFor="comment-body">
@@ -87,7 +86,6 @@ class PostDetail extends Component {
                 onChange={this.handleChange}
               />
             </label>
-            <br />
             <label htmlFor="comment-author">
               Author
               <br />
@@ -98,7 +96,6 @@ class PostDetail extends Component {
                 onChange={this.handleChange}
               />
             </label>
-            <br />
             <button
               className="comment-submit"
               onClick={this.handleSubmit}
