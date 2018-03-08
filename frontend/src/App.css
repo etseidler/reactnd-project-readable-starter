@@ -243,6 +243,20 @@ body.ReactModal__Body--open {
   display: flex;
   flex-direction: column;
 }
+.comment-edit-buttons button {
+  width: 10%;
+  background-color: #BBB;
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 0.2em 0;
+  margin: 0.25em;
+  cursor: pointer;
+  font-size: small;
+}
+.comment-edit-buttons button:disabled {
+  border: 1px solid rgba(0,0,0,.25);
+  cursor: default;
+}
 .comment-edit-mode textarea {
   font-size: medium;
   height: 60px;
