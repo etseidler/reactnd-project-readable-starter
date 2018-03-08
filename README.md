@@ -1,22 +1,39 @@
-# Readable API Server
+# Readable 
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+## TL;DR
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
-
-## Start Developing
-
-To get started developing right away:
+To get started:
 
 * Install and start the API server
     - `cd api-server`
     - `npm install`
     - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
+* In another terminal window, start the frontend
     - `cd frontend`
     - `npm start`
+* Visit `http://localhost:3000` in a browser
 
 ## API Server
 
 Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+
+## Frontend
+
+Information about the frontend and how to use it can be found in its [README file](frontend/README.md).
+
+## What You're Getting
+
+This application is a Reddit knockoff.
+Users can add posts and vote on them.
+Users can also add comments and vote on them as well.
+Both posts and comments can be edited or deleted.
+
+NOTE: This application does not contain any sort of authentication or authorization. So anyone can create, edit, or delete posts and comments.
+
+## Why?
+
+This app was developed as part of my coursework for the React Nanodegree course from Udacity. It's the second project out of three.
+
+## How?
+
+Udacity provided a starter repo/project that included the `api-server`. I used `create-react-app` to bootstrap the creation of the `frontend` app. For this project I wrote all the markup and styles as well as the app functionality.

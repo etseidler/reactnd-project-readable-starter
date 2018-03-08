@@ -1,25 +1,8 @@
-## TL;DR
+# Frontend
 
-To get started:
+To install and start the frontend, run the following commands in this directory:
 
-* install all project dependencies with `npm install`
-* start the server with `npm start`
-* Visit `http://localhost:3000`
+* `npm install`
+* `npm start`
 
-
-## What You're Getting
-
-This application is a Reddit knockoff.
-Users can add posts and vote on them.
-Users can also add comments and vote on them as well.
-Both posts and comments can be edited or deleted.
-
-NOTE: This application does not contain any sort of authentication or authorization. So anyone can create, edit, or delete posts and comments.
-
-## Why?
-
-This app was developed as part of my coursework for the React Nanodegree course from Udacity. It's the second project out of three.
-
-## How?
-
-Udacity provided a starter repo/project that included the `api-server`. I used `create-react-app` to bootstrap the creation of the `frontend` app. For this project I wrote all the markup and styles as well as the app functionality.
+Then visit `http://localhost:3000`
