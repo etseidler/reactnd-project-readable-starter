@@ -29,7 +29,7 @@ class PostList extends Component {
     this.props.updateSortOrder(sortOrder)
   }
   render() {
-    const { postsById, sortOrder } = this.props
+    const { postsById, sortOrder, category } = this.props
     const mainContent = this.props.categoryIds.length > 0
       ? (
         <div className="post-list">
@@ -45,7 +45,7 @@ class PostList extends Component {
       <div className="post-list-container">
         <i
           className="post-add-icon icon ion-plus-circled"
-          onClick={this.props.openModal}
+          onClick={() => this.props.openModal('Add New Post', { category })}
         />
         {mainContent}
       </div>
@@ -75,18 +75,7 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    updateSortOrder: sortOrder => dispatch(updateSortOrder(sortOrder)),
-    changeCategory: category => dispatch(changeCategory(category)),
-    openModal: () => dispatch(openModal(
-      'Add New Post',
-      { category: ownProps.category }
-    ))
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { updateSortOrder, changeCategory, openModal }
 )(PostList)

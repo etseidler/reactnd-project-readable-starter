@@ -75,14 +75,7 @@ function mapStateToProps({ categories, posts, modal }) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadCategories: data => dispatch(loadCategories(data)),
-    loadPosts: data => dispatch(loadPosts(data))
-  }
-}
-
 export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
+  { loadCategories, loadPosts }
 )(App))

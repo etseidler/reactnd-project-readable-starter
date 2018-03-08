@@ -65,32 +65,21 @@ class Post extends Component {
             <div className="post-author">by {author}</div>
           </div>
         </div>
-        <ModifyControl onEdit={this.props.openModal} onDelete={() => this.delete(id)} />
+        <ModifyControl
+          onEdit={() => this.props.openModal('Edit Post', { title, author, category, body, id })}
+          onDelete={() => this.delete(id)}
+        />
       </div>
     )
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  const { title, author, category, body, id: postId } = ownProps.post
-  return {
-    downvote: id => dispatch(downvotePost(id)),
-    upvote: id => dispatch(upvotePost(id)),
-    delete: id => dispatch(deletePost(id)),
-    openModal: () => dispatch(openModal(
-      'Edit Post',
-      {
-        title,
-        author,
-        category,
-        body,
-        id: postId
-      }
-    ))
-  }
-}
-
 export default connect(
   null,
-  mapDispatchToProps
+  {
+    downvote: downvotePost,
+    upvote: upvotePost,
+    delete: deletePost,
+    openModal
+  }
 )(Post)

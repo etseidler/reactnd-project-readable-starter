@@ -111,17 +111,13 @@ class Comment extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    downvote: id => dispatch(downvoteComment(id)),
-    upvote: id => dispatch(upvoteComment(id)),
-    delete: id => dispatch(deleteComment(id)),
-    update: comment => dispatch(updateComment(comment)),
-    deletePostComment: postId => dispatch(deletePostComment(postId))
-  }
-}
-
 export default connect(
   null,
-  mapDispatchToProps
+  {
+    downvote: downvoteComment,
+    upvote: upvoteComment,
+    delete: deleteComment,
+    update: updateComment,
+    deletePostComment
+  }
 )(Comment)

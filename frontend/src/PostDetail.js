@@ -121,16 +121,7 @@ function mapStateToProps({ comments }) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    changeCategory: category => dispatch(changeCategory(category)),
-    loadPostComments: comments => dispatch(loadPostComments(comments)),
-    addNewComment: comment => dispatch(addNewComment(comment)),
-    addPostComment: postId => dispatch(addPostComment(postId))
-  }
-}
-
 export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
+  { changeCategory, loadPostComments, addNewComment, addPostComment }
 )(PostDetail))

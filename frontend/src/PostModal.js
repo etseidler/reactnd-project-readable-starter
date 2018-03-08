@@ -206,15 +206,7 @@ function mapStateToProps({ categories, modal }) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addNewPost: post => dispatch(addNewPost(post)),
-    updatePost: post => dispatch(updatePost(post)),
-    closeModal: () => dispatch(closeModal())
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { addNewPost, updatePost, closeModal }
 )(PostModal)
