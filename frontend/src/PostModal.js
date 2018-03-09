@@ -15,15 +15,16 @@ import { capitalize } from './utils/helpers'
 class PostModal extends Component {
   constructor(props) {
     super(props)
-    const firstCategoryName = props.categories.allNames[0]
+    const { categories, isOpen, title, author, category, body } = props
+    const firstCategoryName = categories.allNames[0]
 
     this.state = {
-      isOpen: props.isOpen,
-      title: props.title,
-      author: props.author,
-      category: props.category || firstCategoryName,
+      isOpen,
+      title,
+      author,
+      category: category || firstCategoryName,
       firstCategoryName,
-      body: props.body,
+      body,
       submitDisabled: true
     }
 
@@ -35,14 +36,14 @@ class PostModal extends Component {
     this.createNewPost = this.createNewPost.bind(this)
     this.editPost = this.editPost.bind(this)
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.category !== this.state.category) {
-      this.setState({ category: nextProps.category || this.state.firstCategoryName })
+  componentWillReceiveProps({ category, title, author, body }) {
+    if (category !== this.state.category) {
+      this.setState({ category: category || this.state.firstCategoryName })
     }
     this.setState({
-      title: nextProps.title,
-      author: nextProps.author,
-      body: nextProps.body
+      title,
+      author,
+      body
     })
   }
   validateFormFields() {
@@ -103,6 +104,7 @@ class PostModal extends Component {
     this.dismiss()
   }
   render() {
+    const { headerText, id: postId, categories } = this.props
     return (
       <Modal
         appElement={document.getElementById('root')}
@@ -110,7 +112,7 @@ class PostModal extends Component {
         style={modalStyles}
       >
         <div className="modal-container">
-          <div className="modal-header">{this.props.headerText}</div>
+          <div className="modal-header">{headerText}</div>
           <div className="modal-body">
             <div className="post-form">
               <label htmlFor="post-title">
@@ -131,7 +133,7 @@ class PostModal extends Component {
                   id="post-author"
                   defaultValue={this.state.author}
                   onChange={this.handleFieldChange}
-                  disabled={this.props.id}
+                  disabled={postId}
                 />
               </label>
               <label htmlFor="post-body">
@@ -142,9 +144,9 @@ class PostModal extends Component {
                   id="post-category"
                   defaultValue={this.state.category}
                   onChange={this.handleFieldChange}
-                  disabled={this.props.id}
+                  disabled={postId}
                 >
-                  {this.props.categories.allNames
+                  {categories.allNames
                     .map(categoryName => (
                       <option key={categoryName} value={categoryName}>
                         {capitalize(categoryName)}

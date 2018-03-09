@@ -30,8 +30,9 @@ class PostDetail extends Component {
     this.redirectToMainPage = this.redirectToMainPage.bind(this)
   }
   componentDidMount() {
-    this.props.changeCategory(this.props.post.category)
-    getPostCommentsRequest(this.props.post.id).then(this.props.loadPostComments)
+    const { post: { category, id } } = this.props
+    this.props.changeCategory(category)
+    getPostCommentsRequest(id).then(this.props.loadPostComments)
   }
   handleChange({ target: { name, value } }) {
     this.setState(
@@ -44,16 +45,17 @@ class PostDetail extends Component {
     );
   }
   handleSubmit() {
+    const { post: { id: postId } } = this.props
     const newCommentData = {
       timestamp: Date.now(),
       id: uuid(),
       body: this.state.commentBody,
       author: this.state.commentAuthor,
-      parentId: this.props.post.id
+      parentId: postId
     }
     createNewCommentRequest(newCommentData).then((comment) => {
       this.props.addNewComment(comment)
-      this.props.addPostComment(this.props.post.id)
+      this.props.addPostComment(postId)
     })
     this.setState({
       commentBody: '',
@@ -65,7 +67,7 @@ class PostDetail extends Component {
     this.props.history.push('/')
   }
   render() {
-    const { post } = this.props
+    const { post, comments } = this.props
     return (
       <div className="post-detail">
         <Post
@@ -105,8 +107,8 @@ class PostDetail extends Component {
             </button>
           </div>
           <div className="comments-list">
-            {this.props.comments.allIds.map(commentId => (
-              <Comment key={commentId} comment={this.props.comments.byId[commentId]} />
+            {comments.allIds.map(commentId => (
+              <Comment key={commentId} comment={comments.byId[commentId]} />
             ))}
           </div>
         </div>

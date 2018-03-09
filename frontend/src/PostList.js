@@ -29,18 +29,18 @@ class PostList extends Component {
     this.props.updateSortOrder(sortOrder)
   }
   render() {
-    const { postsById, sortOrder, category } = this.props
-    const mainContent = this.props.categoryIds.length > 0
+    const { postsById, sortOrder, category, categoryIds, currentCategory } = this.props
+    const mainContent = categoryIds.length > 0
       ? (
         <div className="post-list">
           <PostListSorter
             onChange={this.handleSortChange}
             sortOrder={sortOrder}
           />
-          {this.props.categoryIds.map(id => <Post key={id} post={postsById[id]} />)}
+          {categoryIds.map(id => <Post key={id} post={postsById[id]} />)}
         </div>
       )
-      : <NotFound text="No Posts Found" hideMainPageLink={!this.props.currentCategory} />
+      : <NotFound text="No Posts Found" hideMainPageLink={!currentCategory} />
     return (
       <div className="post-list-container">
         <i

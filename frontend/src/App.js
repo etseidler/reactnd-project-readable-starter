@@ -21,14 +21,15 @@ class App extends Component {
     getPostsRequest().then(this.props.loadPosts)
   }
   render() {
-    const noCategories = this.props.categories.allNames.length === 0
+    const { categories, posts, modal } = this.props
+    const noCategories = categories.allNames.length === 0
     if (noCategories) {
       return null
     }
     return (
       <div>
         <div className="title-bar"><Link to="/">Readable</Link></div>
-        <CategoryList categories={this.props.categories} />
+        <CategoryList categories={categories} />
         <Switch>
           <Route exact path="/"
             render={() => (
@@ -38,7 +39,7 @@ class App extends Component {
           <Route exact path="/:category"
             render={(props) => {
               const { match: { params: { category: urlCategoryName } } } = props
-              if (!this.props.categories.allNames.includes(urlCategoryName)) {
+              if (!categories.allNames.includes(urlCategoryName)) {
                 return <NotFound text="Category Not Found" />
               }
               return <PostList category={urlCategoryName} />
@@ -47,12 +48,12 @@ class App extends Component {
           <Route exact path="/:category/:postId"
             render={(props) => {
               const { match: { params: { postId: urlPostId } } } = props
-              const postNotAvailable = !this.props.posts.allIds.includes(urlPostId) ||
-                this.props.posts.byId[urlPostId].deleted
+              const postNotAvailable = !posts.allIds.includes(urlPostId) ||
+                posts.byId[urlPostId].deleted
               if (postNotAvailable) {
                 return <NotFound text="Post Not Found" />
               }
-              return <PostDetail post={this.props.posts.byId[urlPostId]} />
+              return <PostDetail post={posts.byId[urlPostId]} />
             }}
           />
           <Route
@@ -61,7 +62,7 @@ class App extends Component {
             )}
           />
         </Switch>
-        <PostModal isOpen={this.props.modal.isOpen} />
+        <PostModal isOpen={modal.isOpen} />
       </div>
     )
   }

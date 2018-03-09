@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { capitalize } from './utils/helpers'
 
-function CategoryList(props) {
+function CategoryList({ categories: { allNames, byName }, selectedCategory }) {
   return (
     <div className="category-list">
-      {props.categories.allNames.map((catName) => {
-        const { name, path } = props.categories.byName[catName]
-        const categoryIsSelected = props.selectedCategory === name
+      {allNames.map((catName) => {
+        const { name, path } = byName[catName]
+        const categoryIsSelected = selectedCategory === name
         return (
           <div
             key={name}

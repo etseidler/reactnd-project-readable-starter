@@ -47,7 +47,8 @@ class Post extends Component {
         author,
         category,
         body
-      }
+      },
+      detailMode
     } = this.props
     return (
       <div className="post-item">
@@ -57,9 +58,9 @@ class Post extends Component {
         </div>
         <div className="post-main">
           <div className="post-title">
-            {this.props.detailMode ? title : <Link to={`/${category}/${id}`}>{title}</Link> }
+            {detailMode ? title : <Link to={`/${category}/${id}`}>{title}</Link> }
           </div>
-          {this.props.detailMode ? <div className="post-body">{body}</div> : null}
+          {detailMode ? <div className="post-body">{body}</div> : null}
           <div className="post-minor">
             <div className="post-comment-count">{commentCount} comment{commentCount !== 1 ? 's' : ''}</div>
             <div className="post-author">by {author}</div>
