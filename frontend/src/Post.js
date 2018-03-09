@@ -16,8 +16,8 @@ import {
 } from './utils/api'
 
 class Post extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
 
     this.upvote = this.upvote.bind(this)
     this.downvote = this.downvote.bind(this)
