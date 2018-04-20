@@ -10,6 +10,7 @@ To get started:
     - `node server`
 * In another terminal window, start the frontend
     - `cd frontend`
+    - `npm install`
     - `npm start`
 * Visit `http://localhost:3000` in a browser
 
